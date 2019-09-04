@@ -1,16 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Registration from "./registration";
+// import Registration from "./registration";
+import Welcome from "./welcome";
 
-// ReactDOM.render(<HelloWorld />, document.querySelector("main"));
-//
-// function HelloWorld() {
-//     return <div>Hello, World!</div>;
-// }
+// import axios from "./axios";
+// import Login from "./login";
+// import { HashRouter, Route, Link } from "react-router-dom";
 
 let elem;
 if (location.pathname === "/welcome") {
-    elem = <Registration />;
+    elem = <Welcome />;
     // if user is on /welcome route, that means user is NOT logged in
     // and we should render the Registration component.
 } else {

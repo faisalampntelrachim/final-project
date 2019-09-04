@@ -1,9 +1,15 @@
 import React from "react";
-import axios from "axios";
+import axios from "./axios";
+// import Login from "./login";
+import { Link } from "react-router-dom";
 
 export default class Registration extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            /// I must initialize the error
+            error: false
+        };
         // solution to error "cannot read property setState of undefined" is the below code:
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -16,29 +22,38 @@ export default class Registration extends React.Component {
                 [e.target.name]: e.target.value,
                 users: true
             },
-            () => console.log("this.state: ", this.state)
+            () =>
+                console.log(
+                    "HandleChange in registration component: ",
+                    this.state
+                )
         );
     }
     handleSubmit(e) {
         e.preventDefault();
         // we use this.setState to PUT information in state
         axios
-            .post("/welcome", this.state)
-            .then(function(resp) {
-                location.replace("/logo");
+            .post("/register", this.state)
+            .then(resp => {
                 console.log("resp from post/logo:", resp);
-                // me.images.unshift(resp.data[0]); // unshift the image. Put it in the front of an array
+                if (resp.data.success) {
+                    location.replace("/logo");
+                } else {
+                    this.setState({
+                        error: true
+                    });
+                }
             })
             .catch(function(err) {
-                console.log("err in post/welcome:", err);
+                console.log("err in post/register:", err);
             });
     }
     render() {
         return (
-            <div onSubmit={this.handleSubmit}>
+            <div>
+                {this.state.error && <p>Oops wrong!Try again!</p>}
                 <h1> Welcome to the Social network</h1>
-                <h2> Please Register Here</h2>
-                <form>
+                <form onSubmit={this.handleSubmit}>
                     <input
                         name="first"
                         placeholder="first"
@@ -57,10 +72,13 @@ export default class Registration extends React.Component {
                     <input
                         name="password"
                         placeholder="password"
+                        type="password"
                         onChange={this.handleChange}
                     />
+                    <h2> Please Register Here</h2>
                     <button>submit</button>
                 </form>
+                <Link to="/login">Log in</Link>
             </div>
         );
     }

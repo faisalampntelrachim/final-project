@@ -24,7 +24,7 @@ export default class Registration extends React.Component {
             },
             () =>
                 console.log(
-                    "HandleChange in registration component: ",
+                    " err HandleChange in registration component: ",
                     this.state
                 )
         );
@@ -37,7 +37,7 @@ export default class Registration extends React.Component {
             .then(resp => {
                 console.log("resp from post/logo:", resp);
                 if (resp.data.success) {
-                    location.replace("/logo");
+                    location.replace("/app");
                 } else {
                     this.setState({
                         error: true
@@ -83,40 +83,3 @@ export default class Registration extends React.Component {
         );
     }
 }
-
-// handleSubmit(e) {
-//     e.preventDefault();
-//     // we use this.setState to PUT information in state
-//                 axios
-//                     .post("/registration",this.state)
-//                     .then(function(resp) {
-//                         location.replace("./")
-//                         console.log("resp from post/upload:", resp);
-
-//                     })
-//                     .catch(function(err) {
-//                         console.log("err in post/welcome:", err);
-//                     });
-// }
-
-// onChange = { e => this.handleChange(e) }
-//
-// class Welcome extends React.Component {
-//     constructor() {
-//         super()
-//     }
-//
-//     render() {
-//         return (
-//             <div>
-//                 <Registration />
-//             </div>
-//         )
-//     }
-// }
-//
-// export default function Hello() {
-//     return (
-//         <div>Hello, World!</div>
-//     );
-// }

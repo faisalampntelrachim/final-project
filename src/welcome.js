@@ -12,9 +12,10 @@ export default class Welcome extends React.Component {
         return (
             <HashRouter>
                 <div>
+                    <img src="socialnetwork.jpg" />
                     <div>
-                        <Route path="/" component={Registration} />
-                        <Route path="/login" component={Login} />
+                        <Route exact path="/" component={Registration} />
+                        <Route exact path="/login" component={Login} />
                     </div>
                 </div>
             </HashRouter>

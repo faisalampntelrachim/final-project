@@ -23,6 +23,7 @@ exports.addUsers = function(first, last, email, password) {
         });
 };
 
+// query for the log in
 exports.getHashedpassword = function(email) {
     return db
         .query(
@@ -35,6 +36,44 @@ exports.getHashedpassword = function(email) {
             return rows;
         });
 };
+exports.addUsersInfo = function() {
+    return db
+        .query(
+            `SELECT *
+            FROM users
+            WHERE id=$1
+            `
+        )
+        .then(({ rows }) => {
+            return rows;
+        });
+};
+
+//logo or app to mkae the imageurl appear
+exports.addUsersUpdate = function(id, imageurl) {
+    console.log("users table update");
+    return db.query(
+        `UPDATE users
+        SET
+        imageurl=$2
+        WHERE id = $1`,
+        [id, imageurl]
+    );
+};
+// exports.addUsersUpdate = function() {
+//     return db
+//         .query(
+//             `UPDATE users
+//             SET first=$2,
+//             last=$3,
+//              email=$4
+//              imageurl=$5
+//              WHERE users.id = $1`
+//         )
+//         .then(({ rows }) => {
+//             return rows;
+//         });
+// };
 
 // exports.getUsers = function() {
 //     return db

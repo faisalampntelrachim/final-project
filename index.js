@@ -7,6 +7,32 @@ const { hash, compare } = require("./utils/bc");
 const cookieSession = require("cookie-session");
 const csurf = require("csurf");
 
+const s3 = require("./s3");
+const config = require("./config");
+
+//////FILE UPLOAD BOILERPLATE//////
+const multer = require("multer");
+const uidSafe = require("uid-safe");
+const path = require("path");
+
+const diskStorage = multer.diskStorage({
+    destination: function(req, file, callback) {
+        callback(null, __dirname + "/uploads");
+    },
+    filename: function(req, file, callback) {
+        uidSafe(24).then(function(uid) {
+            callback(null, uid + path.extname(file.originalname));
+        });
+    }
+});
+
+const uploader = multer({
+    storage: diskStorage,
+    limits: {
+        fileSize: 2097152
+    }
+});
+
 app.use(compression());
 
 app.use(express.json()); // i   forgot only that and I couldn't redirect!!!
@@ -40,7 +66,6 @@ if (process.env.NODE_ENV != "production") {
 } else {
     app.use("/bundle.js", (req, res) => res.sendFile(`${__dirname}/bundle.js`));
 }
-// app.use(csurf());
 
 // app.use(function(req, res, next) {
 //     res.setHeader("X-Frame-Options", "DENY");
@@ -59,15 +84,10 @@ app.get("/", function(req, res) {
     res.redirect("/welcome");
 }); //redirect route
 
-// app.get("/welcome", function(req, res) {
-//     // console.log(req.session);
-//     res.render("register", {
-//         layout: "main"
-//     });
-// });
 app.post("/register", (req, res) => {
     // console.log(" you registered to the route");
     console.log("body in the post register/: ", req.body);
+
     if (req.body.password == "") {
         res.json({
             success: false,
@@ -79,12 +99,11 @@ app.post("/register", (req, res) => {
             .then(hash => {
                 console.log("hashed text is: ", hash);
                 db.addUsers(req.body.first, req.body.last, req.body.email, hash)
-                    .then(result => {
-                        console.log(result);
-                        // req.session.userId = id;
+                    .then(id => {
+                        console.log(id);
+                        req.session.userId = id;
                         res.json({
-                            success: false,
-                            error: "error"
+                            success: true // This must be true since all of the required fields exist
                         }); // if i have only that then the following route is / logo
                         // res.redirect("/welcome"); // if i just have res.redirect then after the hashed text the route is / welcome  and after / logo
                     })
@@ -92,12 +111,18 @@ app.post("/register", (req, res) => {
                         console.log(" The error in post registration is:", err);
                         // res.render("welcome");
                         res.json({
-                            success: false,
-                            error: "error"
+                            success: false
+                            // error: "error"
                         });
                     });
             })
-            .catch(e => console.log(e));
+            .catch(e => {
+                console.log(e);
+                res.json({
+                    success: false,
+                    error: "error"
+                });
+            });
     }
 });
 
@@ -134,6 +159,30 @@ app.post("/login", (req, res) => {
         });
 });
 
+app.get("/users", (req, res) => {
+    db.addUsersInfo(req.session.userId).then(resp => {
+        res.json(resp);
+    });
+});
+
+app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
+    const { filename } = req.file;
+    const imageurl = config.s3Url + filename;
+    // const { first, last } = req.body;
+    if (req.file) {
+        console.log("The req.file is:", req.file);
+    }
+    db.addUsersUpdate(req.session.userId, imageurl)
+        .then(result => {
+            console.log("The new image is:", result);
+            // url.unshift();
+            res.json(result);
+        })
+
+        .catch(err => {
+            console.log("The error in post upload is", err);
+        });
+});
 //This route needs to  be last
 app.get("*", function(req, res) {
     res.sendFile(__dirname + "/index.html");

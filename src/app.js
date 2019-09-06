@@ -1,4 +1,5 @@
 import React from "react";
+import Profile from "./profile";
 import Profilepic from "./profilepic";
 import { Uploader } from "./uploader";
 import axios from "./axios";
@@ -8,12 +9,14 @@ export default class App extends React.Component {
         super();
         this.state = {
             first: "faisal",
-            last: "last name",
+            last: "",
             imageurl: "", //if i don't leave it empty then if I put a photo is default
+            bio: "",
             uploaderIsVisible: false
         };
         this.showModal = this.showModal.bind(this);
         this.updateImageurl = this.updateImageurl.bind(this);
+        this.setBio = this.setBio.bind(this);
         // this.handleChange = this.handleChange.bind(this);
         // this.handleSubmit = this.handleSubmit.bind(this);
         // this.handleClick = this.handleClick.bind(this);
@@ -56,24 +59,42 @@ export default class App extends React.Component {
             imageurl: img
         });
     }
+    setBio(bio) {
+        this.setState({
+            bio: bio
+        });
+    }
     render() {
         return (
             <div>
                 <form>
-                    <h1 onClick={this.showModal}>Hello from App</h1>
-                    <img src="socialnetwork.jpg" />
-                    <Profilepic
-                        first={this.state.first} // no comma here
-                        last={this.state.last}
-                        imageurl={this.state.imageurl}
-                        showModal={this.showModal}
-                    />
-                    {this.state.uploaderIsVisible}
-                    <Uploader
-                        onClick={this.handleClick}
-                        handleChange={this.handleChange}
-                        updateImageurl={this.updateImageurl}
-                    />
+                    <h1 onClick={this.showModal}></h1>
+                    <header>
+                        <img src="socialnetwork.jpg" />
+                        <Profilepic
+                            first={this.state.first} // no comma here
+                            last={this.state.last}
+                            imageurl={this.state.imageurl}
+                            showModal={this.showModal}
+                        />
+                    </header>
+                    <div className="main">
+                        <Profile
+                            first={this.state.first} // no comma here
+                            last={this.state.last}
+                            imageurl={this.state.imageurl}
+                            size="xl"
+                            setBio={this.setBio}
+                        />
+                    </div>
+                    <div>
+                        {this.state.uploaderIsVisible}
+                        <Uploader
+                            onClick={this.handleClick}
+                            handleChange={this.handleChange}
+                            updateImageurl={this.updateImageurl}
+                        />
+                    </div>
                 </form>
             </div>
         );

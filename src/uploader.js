@@ -44,7 +44,6 @@ export class Uploader extends React.Component {
     render() {
         return (
             <div>
-                <h3>Want to change your image!</h3>
                 <form>
                     <input
                         type="file"
@@ -58,3 +57,5 @@ export class Uploader extends React.Component {
         );
     }
 }
+
+// <h3>Want to change your image!</h3>

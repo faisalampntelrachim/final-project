@@ -1,3 +1,27 @@
 body {
     background-color: teal;
 }
+
+header img {
+    float: right;
+    height: 50px;
+}
+
+.main img {
+    height: 300px;
+}
+
+.bioeditor textarea {
+    height: 100px;
+}
+
+/* .profilepic img {
+    float: left;
+    height: 100px;
+    width: 100px;
+}
+
+.profilepiccomponenet img {
+    height: 300px;
+    width: 300px;
+} */

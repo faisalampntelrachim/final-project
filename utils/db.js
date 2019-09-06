@@ -56,10 +56,25 @@ exports.addUsersUpdate = function(id, imageurl) {
         `UPDATE users
         SET
         imageurl=$2
-        WHERE id = $1`,
+        WHERE id = $1
+        RETURNING imageurl`,
         [id, imageurl]
     );
 };
+
+//to get bio from users
+exports.addUsersBio = function(id, bio) {
+    console.log("users table update");
+    return db.query(
+        `UPDATE users
+        SET
+        bio=$2
+        WHERE id = $1
+        RETURNING bio`,
+        [id, bio]
+    );
+};
+
 // exports.addUsersUpdate = function() {
 //     return db
 //         .query(

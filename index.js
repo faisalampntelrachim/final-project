@@ -169,6 +169,7 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
     const { filename } = req.file;
     const imageurl = config.s3Url + filename;
     // const { first, last } = req.body;
+    console.log("the image url is:", imageurl);
     if (req.file) {
         console.log("The req.file is:", req.file);
     }
@@ -176,7 +177,9 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
         .then(result => {
             console.log("The new image is:", result);
             // url.unshift();
-            res.json(result);
+            res.json({
+                image: imageurl
+            });
         })
 
         .catch(err => {

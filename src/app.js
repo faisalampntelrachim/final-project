@@ -7,15 +7,16 @@ export default class App extends React.Component {
     constructor() {
         super();
         this.state = {
-            name: "faisal",
+            first: "faisal",
             last: "last name",
             imageurl: "", //if i don't leave it empty then if I put a photo is default
             uploaderIsVisible: false
         };
         this.showModal = this.showModal.bind(this);
-        this.handleChange = this.handleChange.bind(this);
+        this.updateImageurl = this.updateImageurl.bind(this);
+        // this.handleChange = this.handleChange.bind(this);
         // this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleClick = this.handleClick.bind(this);
+        // this.handleClick = this.handleClick.bind(this);
     }
 
     componentDiMount() {
@@ -50,35 +51,11 @@ export default class App extends React.Component {
             // this.imageId = imagesId;
         });
     }
-    handleChange(e) {
-        // we use this.setState to PUT information in state!
-        this.setState(
-            {
-                [e.target.imageurl]: e.target.value,
-                users: true
-            },
-            () => console.log("HandleChange in app component: ", this.state)
-        );
+    updateImageurl(img) {
+        this.setState({
+            imageurl: img
+        });
     }
-    handleSubmit(e) {
-        e.preventDefault();
-    }
-
-    handleClick(e) {
-        e.preventDefault();
-        this.setState({});
-
-        axios
-            .post("/upload")
-            .then(resp => {
-                console.log("resp from post/upload handleclick:", resp);
-                this.imageurl.unshift(resp.data[0]); // unshift the image. Put it in the front of an array
-            })
-            .catch(err => {
-                console.log("err in post/upload:", err);
-            });
-    }
-
     render() {
         return (
             <div>
@@ -95,9 +72,47 @@ export default class App extends React.Component {
                     <Uploader
                         onClick={this.handleClick}
                         handleChange={this.handleChange}
+                        updateImageurl={this.updateImageurl}
                     />
                 </form>
             </div>
         );
     }
 }
+
+//     render() {
+//         return (
+//             <div>
+//                 <form>
+//                     <h1 onClick={this.showModal}>Hello from App</h1>
+//                     <img src="socialnetwork.jpg" />
+//                     <Profilepic
+//                         first={this.state.first} // no comma here
+//                         last={this.state.last}
+//                         imageurl={this.state.imageurl}
+//                         showModal={this.showModal}
+//                     />
+//                     // <Profile
+//                     // profile:{(
+//                     //     <Profilepic
+//                     //         size="xl"
+//                     //         first={this.state.first} // no comma here
+//                     //         last={this.state.last}
+//                     //         imageurl={this.state.imageurl}
+//                     //         showModal={this.showModal}
+//                     //     />
+//                     // )},
+//                     // imageurl={this.state.imageurl}
+//                     // first={this.state.first} // no comma here
+//                     // last={this.state.last}
+//                     // showUploader={(=> this.setState({uploaderVisible:}))}
+//                     // bio={this state.bio}
+//                     // setBio={bio => {}}    //setBio function
+//                     // />
+//                     // {this.state.uploaderIsVisible}
+//                     <Uploader onClick={this.handleClick} handleChange={this.handleChange}/>
+//                 </form>
+//             </div>
+//         );
+//     }
+// }

@@ -32,7 +32,7 @@ export class Uploader extends React.Component {
         axios
             .post("/upload", formData)
             .then(resp => {
-                console.log("resp from post/upload handleclick:", resp);
+                console.log("resp from post/uploader handleclick:", resp);
                 // this.imageurl.unshift(resp.data.image);
                 // unshift the image. Put it in the front of an array
                 this.props.updateImageurl(resp.data.image);

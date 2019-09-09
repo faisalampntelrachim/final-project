@@ -36,13 +36,14 @@ exports.getHashedpassword = function(email) {
             return rows;
         });
 };
-exports.addUsersInfo = function() {
+exports.addUsersInfo = function(id) {
     return db
         .query(
             `SELECT *
             FROM users
             WHERE id=$1
-            `
+            `,
+            [id]
         )
         .then(({ rows }) => {
             return rows;

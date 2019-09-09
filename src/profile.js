@@ -3,7 +3,7 @@ import ProfilePic from "./profilepic";
 import BioEditor from "./bioeditor";
 // import { Route } from "react-router-dom";
 
-export default function Profile({ first, imageurl, last, size, setBio }) {
+export default function Profile({ first, imageurl, last, size, setBio, bio }) {
     return (
         <div className="profilepic">
             <h1>
@@ -12,11 +12,11 @@ export default function Profile({ first, imageurl, last, size, setBio }) {
             </h1>
             <ProfilePic
                 first={first}
-                imageurl={imageurl}
                 last={last}
+                imageurl={imageurl}
                 size={size}
             />
-            <BioEditor setBio={setBio} />
+            <BioEditor bio={bio} setBio={setBio} />
         </div>
     );
 }

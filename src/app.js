@@ -22,30 +22,32 @@ export default class App extends React.Component {
         // this.handleClick = this.handleClick.bind(this);
     }
 
-    componentDiMount() {
+    componentDidMount() {
         console.log("App mounted");
 
         axios
             .get("/users", this.state)
-            .then(function(response) {
+            .then(response => {
+                console.log("axios get users", response);
                 this.setState({
                     first: response.data[0].first,
                     last: response.data[0].last,
-                    imageurl: response.data[0].imageurl
+                    imageurl: response.data[0].imageurl,
+                    bio: response.data[0].bio
                 });
             })
             .catch(err => {
                 console.log("err get /users", err);
             });
 
-        axios
-            .post("/users")
-            .then(resp => {
-                console.log("resp from post/users:", resp);
-            })
-            .catch(err => {
-                console.log("err in post/users:", err);
-            });
+        // axios
+        //     .post("/users")
+        //     .then(resp => {
+        //         console.log("resp from post/users:", resp);
+        //     })
+        //     .catch(err => {
+        //         console.log("err in post/users:", err);
+        //     });
     }
     showModal() {
         this.setState({
@@ -60,6 +62,7 @@ export default class App extends React.Component {
         });
     }
     setBio(bio) {
+        //data comes from axios
         this.setState({
             bio: bio
         });
@@ -85,6 +88,7 @@ export default class App extends React.Component {
                             imageurl={this.state.imageurl}
                             size="xl"
                             setBio={this.setBio}
+                            bio={this.state.bio}
                         />
                     </div>
                     <div>

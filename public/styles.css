@@ -6,12 +6,15 @@ header img {
     float: right;
     height: 50px;
 }
-
+.welcomeimg img {
+    height: 400px;
+    width: 400px;
+}
 .main img {
     height: 300px;
 }
 
-.bioeditor textarea {
+.bioeditor1 textarea {
     height: 100px;
 }
 

@@ -132,6 +132,7 @@ app.post("/login", (req, res) => {
             compare(req.body.password, result[0].password)
                 .then(match => {
                     if (match) {
+                        console.log(req.session.userId);
                         req.session.userId = result[0].id;
                         req.session.loggedIn = true;
                         res.json({
@@ -160,9 +161,13 @@ app.post("/login", (req, res) => {
 });
 
 app.get("/users", (req, res) => {
-    db.addUsersInfo(req.session.userId).then(resp => {
-        res.json(resp);
-    });
+    db.addUsersInfo(req.session.userId)
+        .then(resp => {
+            res.json(resp);
+        })
+        .catch(e => {
+            console.log("The err in get users is:", e);
+        });
 });
 
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
@@ -186,6 +191,23 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
             console.log("The error in post upload is", err);
         });
 });
+
+app.post("/bio", (req, res) => {
+    console.log(
+        "The req.session.userId body",
+        req.session.userId,
+        req.body.newbio
+    );
+    db.addUsersBio(req.session.userId, req.body.newbio)
+        .then(result => {
+            console.log("The result in bio app post is:", result);
+            res.json(result);
+        })
+        .catch(e => {
+            console.log("The error in /bio post", e);
+        });
+});
+
 //This route needs to  be last
 app.get("*", function(req, res) {
     res.sendFile(__dirname + "/index.html");

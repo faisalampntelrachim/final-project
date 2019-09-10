@@ -76,6 +76,22 @@ exports.addUsersBio = function(id, bio) {
     );
 };
 
+// to limit to 3 users to appear
+exports.getSomeUsers = function() {
+    return db
+        .query(
+            `SELECT
+            *
+            FROM users
+            ORDER BY
+            id DESC
+            LIMIT 3
+            `
+        )
+        .then(({ rows }) => {
+            return rows;
+        });
+};
 //to find friends
 exports.getMatchingUsers = function(val) {
     return db.query(

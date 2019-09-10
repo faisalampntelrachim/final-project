@@ -23,6 +23,9 @@ header img {
     height: 100px;
 }
 
+.otherprofile img {
+    height: 300px;
+}
 /* .profilepic img {
     float: left;
     height: 100px;

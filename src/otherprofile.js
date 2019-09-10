@@ -1,10 +1,5 @@
 import React from "react";
 import axios from "./axios";
-// import { BrowserRouter, Route } from "react-router-dom";
-// import Profile from "./profile";
-// import ProfilePic from "./profilepic";
-// import BioEditor from "./bioeditor";
-// import { Route } from "react-router-dom";
 
 export default class OtherProfile extends React.Component {
     constructor(props) {
@@ -41,21 +36,10 @@ export default class OtherProfile extends React.Component {
             .catch(err => {
                 console.log("err get /users/:id", err);
             });
-        // axios.get("/users/:id" + id).then(resp => {
-        //     console.log("resp from axios users :", resp);
-        //     this.props.match.params.id;
-        // });
-        // if ("/users/" + this.props.match.params.id) {
-        //     this.state.first, this.state.last;
-        //     this.state.imageurl;
-        //     this.state.bio;
-        // } else {
-        //     this.props.history.push("/");
-        // }
     }
     render() {
         return (
-            <div>
+            <div className="otherprofile">
                 <img src={this.state.imageurl} />
                 <h1>
                     {this.state.first}
@@ -66,16 +50,3 @@ export default class OtherProfile extends React.Component {
         );
     }
 }
-
-// <Route
-//     path="/user/:id"
-//     render={props => (
-//         <OtherProfile
-//             key={props.match.imageurl}
-//             match={props.match}
-//             history={props.history}
-//         />
-//     )}
-// />;
-//this state.first
-// return;

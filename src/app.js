@@ -5,6 +5,7 @@ import { Uploader } from "./uploader";
 import axios from "./axios";
 import { BrowserRouter, Route } from "react-router-dom";
 import OtherProfile from "./otherprofile";
+import FindUsers from "./findusers";
 
 export default class App extends React.Component {
     constructor() {
@@ -64,20 +65,6 @@ export default class App extends React.Component {
         return (
             <BrowserRouter>
                 <div>
-                    <Route
-                        exact
-                        path="/"
-                        render={() => (
-                            <Profile
-                                first={this.state.first}
-                                last={this.state.last}
-                                image={this.state.imageurl}
-                                onClick={this.showUploader}
-                                setBio={this.setBio}
-                                bio={this.state.bio}
-                            />
-                        )}
-                    />
                     <div>
                         <h1 onClick={this.showModal}></h1>
                         <header>
@@ -90,13 +77,29 @@ export default class App extends React.Component {
                             />
                         </header>
                     </div>
+                    <Route
+                        exact
+                        path="/"
+                        render={() => (
+                            <Profile
+                                first={this.state.first}
+                                last={this.state.last}
+                                imageurl={this.state.imageurl}
+                                onClick={this.showUploader}
+                                setBio={this.setBio}
+                                bio={this.state.bio}
+                                showModal={this.showModal}
+                            />
+                        )}
+                    />
                     <div>
-                        {this.state.uploaderIsVisible}
-                        <Uploader
-                            onClick={this.handleClick}
-                            handleChange={this.handleChange}
-                            updateImageurl={this.updateImageurl}
-                        />
+                        {this.state.uploaderIsVisible && (
+                            <Uploader
+                                onClick={this.handleClick}
+                                handleChange={this.handleChange}
+                                updateImageurl={this.updateImageurl}
+                            />
+                        )}
                     </div>
                     <Route
                         path="/user/:id"
@@ -109,11 +112,20 @@ export default class App extends React.Component {
                         )}
                     />
                 </div>
+                <Route
+                    path="/users"
+                    render={props => (
+                        <FindUsers
+                            key={props.match}
+                            match={props.match}
+                            history={props.history}
+                        />
+                    )}
+                />
             </BrowserRouter>
         );
     }
 }
-
 //     render() {
 //         return (
 //             <div>
@@ -150,3 +162,5 @@ export default class App extends React.Component {
 //         );
 //     }
 // }
+
+// <img src="socialnetwork.jpg" />

@@ -76,6 +76,16 @@ exports.addUsersBio = function(id, bio) {
     );
 };
 
+//to find friends
+exports.getMatchingUsers = function(val) {
+    return db.query(
+        `SELECT name
+        FROM users
+        WHERE name
+        ILIKE $1;`,
+        [val + "%"]
+    );
+};
 // exports.addUsersUpdate = function() {
 //     return db
 //         .query(

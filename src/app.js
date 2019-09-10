@@ -3,12 +3,14 @@ import Profile from "./profile";
 import Profilepic from "./profilepic";
 import { Uploader } from "./uploader";
 import axios from "./axios";
+import { BrowserRouter, Route } from "react-router-dom";
+import OtherProfile from "./otherprofile";
 
 export default class App extends React.Component {
     constructor() {
         super();
         this.state = {
-            first: "faisal",
+            first: "",
             last: "",
             imageurl: "", //if i don't leave it empty then if I put a photo is default
             bio: "",
@@ -26,9 +28,9 @@ export default class App extends React.Component {
         console.log("App mounted");
 
         axios
-            .get("/users", this.state)
+            .get("/user", this.state)
             .then(response => {
-                console.log("axios get users", response);
+                console.log("axios get user", response);
                 this.setState({
                     first: response.data[0].first,
                     last: response.data[0].last,
@@ -37,17 +39,8 @@ export default class App extends React.Component {
                 });
             })
             .catch(err => {
-                console.log("err get /users", err);
+                console.log("err get /user", err);
             });
-
-        // axios
-        //     .post("/users")
-        //     .then(resp => {
-        //         console.log("resp from post/users:", resp);
-        //     })
-        //     .catch(err => {
-        //         console.log("err in post/users:", err);
-        //     });
     }
     showModal() {
         this.setState({
@@ -69,27 +62,33 @@ export default class App extends React.Component {
     }
     render() {
         return (
-            <div>
-                <form>
-                    <h1 onClick={this.showModal}></h1>
-                    <header>
-                        <img src="socialnetwork.jpg" />
-                        <Profilepic
-                            first={this.state.first} // no comma here
-                            last={this.state.last}
-                            imageurl={this.state.imageurl}
-                            showModal={this.showModal}
-                        />
-                    </header>
-                    <div className="main">
-                        <Profile
-                            first={this.state.first} // no comma here
-                            last={this.state.last}
-                            imageurl={this.state.imageurl}
-                            size="xl"
-                            setBio={this.setBio}
-                            bio={this.state.bio}
-                        />
+            <BrowserRouter>
+                <div>
+                    <Route
+                        exact
+                        path="/"
+                        render={() => (
+                            <Profile
+                                first={this.state.first}
+                                last={this.state.last}
+                                image={this.state.imageurl}
+                                onClick={this.showUploader}
+                                setBio={this.setBio}
+                                bio={this.state.bio}
+                            />
+                        )}
+                    />
+                    <div>
+                        <h1 onClick={this.showModal}></h1>
+                        <header>
+                            <img src="socialnetwork.jpg" />
+                            <Profilepic
+                                first={this.state.first} // no comma here
+                                last={this.state.last}
+                                imageurl={this.state.imageurl}
+                                showModal={this.showModal}
+                            />
+                        </header>
                     </div>
                     <div>
                         {this.state.uploaderIsVisible}
@@ -99,8 +98,18 @@ export default class App extends React.Component {
                             updateImageurl={this.updateImageurl}
                         />
                     </div>
-                </form>
-            </div>
+                    <Route
+                        path="/user/:id"
+                        render={props => (
+                            <OtherProfile
+                                key={props.match.imageurl}
+                                match={props.match}
+                                history={props.history}
+                            />
+                        )}
+                    />
+                </div>
+            </BrowserRouter>
         );
     }
 }

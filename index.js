@@ -81,9 +81,19 @@ app.use((req, res, next) => {
 app.use(express.static("./public"));
 
 app.get("/", function(req, res) {
-    res.redirect("/welcome");
+    if (!req.session.userId) {
+        res.redirect("/welcome");
+    } else {
+        res.sendFile(__dirname + "/index.html");
+    }
 }); //redirect route
-
+app.get("/welcome", function(req, res) {
+    if (req.session.userId) {
+        res.redirect("/");
+    } else {
+        res.sendFile(__dirname + "/index.html");
+    }
+});
 app.post("/register", (req, res) => {
     // console.log(" you registered to the route");
     console.log("body in the post register/: ", req.body);
@@ -160,7 +170,7 @@ app.post("/login", (req, res) => {
         });
 });
 
-app.get("/users", (req, res) => {
+app.get("/user", (req, res) => {
     db.addUsersInfo(req.session.userId)
         .then(resp => {
             res.json(resp);
@@ -170,6 +180,17 @@ app.get("/users", (req, res) => {
         });
 });
 
+app.get("/users/:id", (req, res) => {
+    console.log("The req params is:", req.params.id);
+    db.addUsersInfo(req.params.id)
+        .then(resp => {
+            console.log("The resp in app.get users/:id is:", resp.data);
+            res.json(resp);
+        })
+        .catch(e => {
+            console.log("The err in get users is:", e);
+        });
+});
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
     const { filename } = req.file;
     const imageurl = config.s3Url + filename;

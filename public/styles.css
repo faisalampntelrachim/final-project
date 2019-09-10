@@ -13,7 +13,12 @@ header img {
 .main img {
     height: 300px;
 }
-
+/* .profilepiccomponenet img {
+    height: 300px;
+} */
+.profilepic img {
+    height: 50px;
+}
 .bioeditor1 textarea {
     height: 100px;
 }

@@ -229,23 +229,12 @@ app.post("/bio", (req, res) => {
         });
 });
 
-// app.get("/findusers/:search", (req, res) => {
-//     console.log("The req params is:", req.params.search);
-//     db.getMatchingUsers(req.params.search)
-//         .then(resp => {
-//             console.log("The resp in app.get users/:id is:", resp.data);
-//             res.json(resp);
-//         })
-//         .catch(e => {
-//             console.log("The err in get users is:", e);
-//         });
-// });
-
+// to find 3 users
 app.get("/findusers", (req, res) => {
-    console.log("The req params is:", req.params.search);
-    db.getSomeUsers(req.params.search)
+    console.log("The req params is:", req.body);
+    db.getSomeUsers(req.body)
         .then(resp => {
-            console.log("The resp in app.get findusers/:id is:", resp.data);
+            console.log("The resp in app.get findusers is:", resp.data);
             console.log("resp:", resp);
             res.json(resp);
         })
@@ -253,6 +242,19 @@ app.get("/findusers", (req, res) => {
             console.log("The err in get users is:", e);
         });
 });
+
+app.get("/findusers/:search", (req, res) => {
+    console.log("The req params is:", req.params.search);
+    db.getMatchingUsers(req.params.search)
+        .then(resp => {
+            console.log("The resp in app.get users/:search is:", resp);
+            res.json(resp.rows);
+        })
+        .catch(e => {
+            console.log("The err in get users is:", e);
+        });
+});
+
 //This route needs to  be last
 app.get("*", function(req, res) {
     res.sendFile(__dirname + "/index.html");

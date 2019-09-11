@@ -3,22 +3,15 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function FindUsers() {
-    const [search, setSearch] = useState(""); //1st is the state and 2nd the function to set the state
     const [users, setUsers] = useState([]);
+    const [search, setSearch] = useState(""); //1st is the state and 2nd the function to set the state
 
     // to find only 3
-    // useEffect(() => {
-    //     axios.get("/findusers").then(response => {
-    //         console.log("response.data:", response.data);
-    //         setUsers(response.data);
-    //     });
-    // })();
-
     useEffect(() => {
         axios
             .get("/findusers")
             .then(response => {
-                console.log("response.data:", response);
+                console.log("response.data:", response.data);
                 setUsers(response.data);
             })
             .catch(err => {
@@ -26,51 +19,54 @@ export default function FindUsers() {
             });
     }, []);
 
+    // const searches = match.params.search;
     //to find all of those  users
-    // useEffect(() => {
-    //     // its like componentdidmount
-    //     let ignore = false;
-    //     async () => {
-    //         const { data } = await axios
-    //             .get("/findusers/" + search)
-    //             .then(response => {
-    //                 if (!ignore) {
-    //                     setSearch(response.data);
-    //                     // console.log(
-    //                     //     "axios get findusers with params.id:",
-    //                     //     response.data
-    //                     // );
-    //                 }
-    //             })();
-    //         return () => {
-    //             ignore = true;
-    //         };
-    //     },
-    //         [search];
-    // })();
+    useEffect(() => {
+        console.log("Use effect running");
+        console.log("about to make axios request");
+        axios
+            .get("/findusers/" + search)
+            // + search
+            .then(response => {
+                let ignore = false;
+                console.log("resp from useEffect in find users:", response);
+                if (!ignore) {
+                    setUsers(response.data);
+                    // console.log(
+                    //     "axios get findusers with params.id:",
+                    //     response.data
+                    // );
+                } else {
+                    console.log("ignored");
+                }
+            });
+        // its like componentdidmount
+        // let ignore = false;
+    }, [search]);
 
     const onChange = e => {
-        setUsers(e.target.value);
+        setSearch(e.target.value);
     };
-    const onClick = e => {
-        setUsers(e.target.value);
+    const onSearchClick = e => {
+        setSearch(e.target.value);
     };
     // const onSearchClick = e => setUsers(e.target.value);
 
     return (
         <div>
             <h1>Find People</h1>
-            <input onChange={onChange} defaultValue={users} />
-            <button onClick={onClick}> Search</button>
+            <input onChange={onChange} defaultValue={search} />
+            <button onClick={onSearchClick}> Search</button>
             <div>
                 <ul>
                     {users.map(users => (
                         <div key={users.id}>
                             <li>
                                 <img src={users.imageurl} />
-                                <h2>
+                                <h3>
                                     {users.first} {users.last}
-                                </h2>
+                                </h3>
+                                <h3>{users.bio}</h3>
                             </li>
                         </div>
                     ))}

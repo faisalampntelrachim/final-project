@@ -41,11 +41,14 @@ export default class OtherProfile extends React.Component {
         return (
             <div className="otherprofile">
                 <img src={this.state.imageurl} />
-                <h1>
+                <h2>
                     {this.state.first}
+
                     {this.state.last}
+                    <br />
+
                     {this.state.bio}
-                </h1>
+                </h2>
             </div>
         );
     }

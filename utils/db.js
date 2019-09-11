@@ -92,12 +92,12 @@ exports.getSomeUsers = function() {
             return rows;
         });
 };
-//to find friends
+//to find all of the relevant users I'm typing
 exports.getMatchingUsers = function(val) {
     return db.query(
-        `SELECT name
+        `SELECT *
         FROM users
-        WHERE name
+        WHERE first
         ILIKE $1;`,
         [val + "%"]
     );
@@ -128,3 +128,12 @@ exports.getMatchingUsers = function(val) {
 //             return rows;
 //         });
 // };
+
+// REFERENCES it guarantes for every receiver user there is an id
+
+//that will give all of the rows between the users
+// SELECT * FROM friesndships
+// WHERE
+// (receiver_id =$1 AND sender_id =$2)
+// OR
+// ( receiver_id =$2 AND SENDER_id =$1)

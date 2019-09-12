@@ -19,7 +19,7 @@ export default function FindUsers() {
             });
     }, []);
 
-    // const searches = match.params.search;
+    // its like componentdidmount
     //to find all of those  users
     useEffect(() => {
         console.log("Use effect running");
@@ -40,7 +40,6 @@ export default function FindUsers() {
                     console.log("ignored");
                 }
             });
-        // its like componentdidmount
         // let ignore = false;
     }, [search]);
 

@@ -102,33 +102,70 @@ exports.getMatchingUsers = function(val) {
         [val + "%"]
     );
 };
-// exports.addUsersUpdate = function() {
-//     return db
-//         .query(
-//             `UPDATE users
-//             SET first=$2,
-//             last=$3,
-//              email=$4
-//              imageurl=$5
-//              WHERE users.id = $1`
-//         )
-//         .then(({ rows }) => {
-//             return rows;
-//         });
-// };
 
-// exports.getUsers = function() {
-//     return db
-//         .query(
-//             `SELECT *
-//             FROM users
-//             `
-//         )
-//         .then(({ rows }) => {
-//             return rows;
-//         });
-// };
+//Is there an existing friend request between the given pair of users?
+exports.getFriendships = function(receiver_id, sender_id) {
+    return db
+        .query(
+            `SELECT *
+            FROM friendships
+            WHERE
+            (receiver_id =$1 AND sender_id =$2)
+            OR
+            (sender_id =$2  AND receiver_id =$1)
+            `,
+            [receiver_id, sender_id]
+        )
+        .then(({ rows }) => {
+            return rows;
+        });
+};
+// insert new friendships. if somebody makes a friend request
+exports.addFriendships = function(receiver_id, sender_id) {
+    return db
+        .query(
+            `INSERT
+            INTO friendships
+            (receiver_id, sender_id)
+            VALUES ($1, $2)
+            `,
+            [receiver_id, sender_id]
+        )
+        .then(({ rows }) => {
+            return rows;
+        });
+};
+// when the relathionship exists and they haven't clicked accept
+exports.acceptFriend = function(receiver_id, sender_id) {
+    return db
+        .query(
+            `UPDATE
+            friendships
+            SET accepted = TRUE
+            WHERE
+            (receiver_id = $1 AND sender_id = $2)
+            OR
+            (receiver_id = $2 AND sender_id = $1)
+            RETURNING *`,
+            [receiver_id, sender_id]
+        )
+        .then(({ rows }) => rows);
+};
 
+// delete and cancel friend
+exports.deleteFriend = function(receiver_id, sender_id) {
+    return db
+        .query(
+            `DELETE
+            FROM friendships
+            WHERE
+            (receiver_id = $1 AND sender_id = $2)
+            OR
+            (receiver_id = $2 AND sender_id = $1)`,
+            [receiver_id, sender_id]
+        )
+        .then(({ rows }) => rows);
+};
 // REFERENCES it guarantes for every receiver user there is an id
 
 //that will give all of the rows between the users

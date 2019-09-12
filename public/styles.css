@@ -3,7 +3,6 @@ body {
 }
 
 header img {
-    float: right;
     height: 50px;
 }
 .welcomeimg img {
@@ -13,26 +12,21 @@ header img {
 .main img {
     height: 300px;
 }
-/* .profilepiccomponenet img {
-    height: 300px;
+/* header .profilepiccomponent img {
+    height: 50px !important;
 } */
-.profilepic img {
+.profilepiccomponent img {
+    float: right;
     height: 50px;
+}
+.profilepic img {
+    height: 300px;
 }
 .bioeditor1 textarea {
     height: 100px;
 }
 
 .otherprofile img {
-    height: 300px;
-}
-/* .profilepic img {
-    float: left;
-    height: 100px;
-    width: 100px;
-}
-
-.profilepiccomponenet img {
-    height: 300px;
+    height: 50px;
     width: 300px;
-} */
+}

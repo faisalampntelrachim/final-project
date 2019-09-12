@@ -181,10 +181,10 @@ app.get("/user", (req, res) => {
 });
 
 app.get("/users/:id", (req, res) => {
-    console.log("The req params is:", req.params.id);
+    // console.log("The req params is:", req.params.id);
     db.addUsersInfo(req.params.id)
         .then(resp => {
-            console.log("The resp in app.get users/:id is:", resp.data);
+            // console.log("The resp in app.get users/:id is:", resp);
             res.json(resp);
         })
         .catch(e => {
@@ -239,7 +239,7 @@ app.get("/findusers", (req, res) => {
             res.json(resp);
         })
         .catch(e => {
-            console.log("The err in get users is:", e);
+            console.log("The err in get findusers is:", e);
         });
 });
 
@@ -247,14 +247,64 @@ app.get("/findusers/:search", (req, res) => {
     console.log("The req params is:", req.params.search);
     db.getMatchingUsers(req.params.search)
         .then(resp => {
-            console.log("The resp in app.get users/:search is:", resp);
+            console.log("The resp in app.get findusers/:search is:", resp);
             res.json(resp.rows);
         })
         .catch(e => {
             console.log("The err in get users is:", e);
         });
 });
+//to check if there is a friendship between them
+app.get("/addfriend/:id", (req, res) => {
+    console.log("The app get /addfriend is:", req.params.id);
+    db.getFriendships(req.params.id, req.session.userId) ///maybe req.session.userId
+        .then(resp => {
+            console.log("The resp in app.get /addfriend is:", resp);
+            // console.log("resp:", resp);
+            res.json(resp);
+        })
+        .catch(e => {
+            console.log("The err in app.get friendrequest is:", e);
+        });
+});
 
+//for accept friend
+app.post("/addfriend/:id", (req, res) => {
+    console.log("The app.post /addfriend is:", req.params.id);
+    db.addFriendships(req.params.id, req.session.userId)
+        .then(resp => {
+            console.log("The resp in app.post /addfriend is:", resp);
+            console.log("resp:", resp);
+            res.json(resp);
+        })
+        .catch(e => {
+            console.log("The err in app.post addfriend is:", e);
+        });
+});
+app.post("/acceptfriend/:id", (req, res) => {
+    console.log("The app.post /acceptfriendfriend is:", req.params.id);
+    db.acceptFriend(req.params.id, req.session.userId)
+        .then(resp => {
+            console.log("The resp in app.post/acceptfriend is:", resp);
+            console.log("resp:", resp);
+            res.json(resp);
+        })
+        .catch(e => {
+            console.log("The err in app.post acceptfriend is:", e);
+        });
+});
+app.post("/unfriend/:id", (req, res) => {
+    console.log("The app.post /unfriend is:", req.params.id);
+    db.deleteFriend(req.params.id, req.session.userId)
+        .then(resp => {
+            console.log("The resp in app.post/unfriend is:", resp);
+            console.log("resp:", resp);
+            res.json(resp);
+        })
+        .catch(e => {
+            console.log("The err in app.post unfriend is:", e);
+        });
+});
 //This route needs to  be last
 app.get("*", function(req, res) {
     res.sendFile(__dirname + "/index.html");

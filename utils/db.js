@@ -112,7 +112,7 @@ exports.getFriendships = function(receiver_id, sender_id) {
             WHERE
             (receiver_id =$1 AND sender_id =$2)
             OR
-            (sender_id =$2  AND receiver_id =$1)
+            (sender_id =$1  AND receiver_id =$2)
             `,
             [receiver_id, sender_id]
         )

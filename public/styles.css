@@ -3,6 +3,7 @@ body {
 }
 
 header img {
+    float: right;
     height: 50px;
 }
 .welcomeimg img {
@@ -16,7 +17,8 @@ header img {
     height: 50px !important;
 } */
 .profilepiccomponent img {
-    float: right;
+    /* float: right; */
+    top: 0%;
     height: 50px;
 }
 .profilepic img {
@@ -28,5 +30,5 @@ header img {
 
 .otherprofile img {
     height: 50px;
-    width: 300px;
+    width: 220px;
 }

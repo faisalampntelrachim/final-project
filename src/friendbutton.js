@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "./axios";
+// import "./friendbutton.css";
 
 export default function Friendbutton(props) {
     const [button, setButton] = useState();
@@ -9,22 +10,21 @@ export default function Friendbutton(props) {
         axios
             .get("/addfriend/" + props.id)
             .then(response => {
-                console.log(
-                    "response in axios get addfriend:",
-                    response.data.length
-                );
+                console.log("response in axios get addfriend:", response);
                 if (response.data.length == 0) {
                     setButton("Add friend");
                 } else if (response.data[0].accepted == false) {
-                    // if(props.id){
-                    //     setButton("Cancel friend");
-                    // }else(id){
-                    // setButton("Accept friend");
-                    // }
+                    if (response.data[0].sender_id == props.id) {
+                        setButton("Accept friend");
+                    } else {
+                        setButton("Cancel friend");
+                    }
                     //check in response that accepted=false and add the condition
-                    setButton("Cancel friend");
-                } else if (response.data[0].accepted == true) {
-                    setButton("unfriend"); //unfriend
+                    // setButton("Accept friend");
+                    // } else if (response.data[0].sender_id == props.id) {
+                    //     setButton("unfriend"); //unfriend
+                } else {
+                    setButton("unfriend");
                 }
             })
             .catch(err => {

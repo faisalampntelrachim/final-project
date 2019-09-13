@@ -6,6 +6,7 @@ import axios from "./axios";
 import { BrowserRouter, Route } from "react-router-dom";
 import OtherProfile from "./otherprofile";
 import FindUsers from "./findusers";
+// import CuteAnimals from "./cuteanimals";
 // import FriendButton from "./friendbutton";
 
 export default class App extends React.Component {
@@ -67,16 +68,17 @@ export default class App extends React.Component {
             <BrowserRouter>
                 <div>
                     <div>
-                        <h1 onClick={this.showModal}></h1>
                         <header>
-                            <img src="socialnetwork.jpg" />
-                            <Profilepic
-                                first={this.state.first} // no comma here
-                                last={this.state.last}
-                                imageurl={this.state.imageurl}
-                                showModal={this.showModal}
-                            />
+                            <h1 onClick={this.showModal}></h1>
+
+                            <img src="/socialnetwork.jpg" />
                         </header>
+                        <Profilepic
+                            first={this.state.first} // no comma here
+                            last={this.state.last}
+                            imageurl={this.state.imageurl}
+                            showModal={this.showModal}
+                        />
                     </div>
                     <Route
                         exact

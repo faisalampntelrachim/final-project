@@ -259,9 +259,17 @@ app.get("/addfriend/:id", (req, res) => {
     console.log("The app get /addfriend is:", req.params.id);
     db.getFriendships(req.params.id, req.session.userId) ///maybe req.session.userId
         .then(resp => {
-            console.log("The resp in app.get /addfriend is:", resp);
-            // console.log("resp:", resp);
+            console.log("The resp in app.get /addfriend is:", resp[0]);
+            // if (resp.length == 0 || resp[0] === req.session.userId) {
+            //     //resp.length == 0 ||
+            //     res.json({
+            //         success: false
+            //     });
+            // } else {
+            //     res.json(resp);
+            // }
             res.json(resp);
+            // console.log("resp:", resp);
         })
         .catch(e => {
             console.log("The err in app.get friendrequest is:", e);
@@ -305,6 +313,20 @@ app.post("/unfriend/:id", (req, res) => {
             console.log("The err in app.post unfriend is:", e);
         });
 });
+
+// app.get("cute-animals.json", (req, res) => {
+//     console.log("GET/cute-animas.json is running");
+//     res.json([
+//         {
+//             name: "wombat",
+//             cutenessScore: "super"
+//         },
+//         {
+//             name: "giraffe",
+//             cutenessScore: "extremely"
+//         }
+//     ]);
+// });
 //This route needs to  be last
 app.get("*", function(req, res) {
     res.sendFile(__dirname + "/index.html");

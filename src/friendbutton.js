@@ -24,7 +24,9 @@ export default function Friendbutton(props) {
                     // } else if (response.data[0].sender_id == props.id) {
                     //     setButton("unfriend"); //unfriend
                 } else {
+                    // if (response.data[0].accepted == true) {
                     setButton("unfriend");
+                    // }
                 }
             })
             .catch(err => {

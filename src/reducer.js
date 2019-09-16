@@ -1,19 +1,43 @@
 export default function reducer(state = {}, action) {
-    //we assign a default value to state if it doesn't exist and that default value is an empty {}
-    if (action.type === "ACTION_THAT_WIL_CHANGE_A_THING") {
-        //then change redux state (immutably!)
-    }
-    if (action.type === "GET_ANIMALS") {
-        console.log("GET_ANIMALS in reducer:", action);
+    if (action.type === "RECEIVE_FRIENDS_WANNABES") {
+        console.log("add friends is running");
         state = {
             ...state,
-            cuteAnimals: action.cuteAnimals
+            receiveFriendsWannabes: action.receiveFriendsWannabes
+            // users: action.users
         };
+        // friendsWannabes: [state],
+        // receiveFriendsWannabes: action.receiveFriendsWannabes
     }
-    console.log("state:", state); // i do that console.log if i dont have the dev tools
-    return state; // i must always return the state
+    if (action.type === "ACCEPT_FRIEND_REQUEST") {
+        console.log("accept friend is running");
+        // state = {
+        //     ...state,
+        //     users: state.users.map(
+        //         user => {
+        //             if (user.id != action.id) {
+        //                 return user;
+        //             } else {
+        //                 return {
+        //                     ...user,
+        //                     hot: action.type == 'MAKE_HOT'
+        //                 };
+        //             }
+        //         }
+        //     )
+        // };
+        // state = {
+        //     ...state,
+        //     acceptFriendRequest: action.acceptFriendRequest
+        // };
+    }
+
+    if (action.type === "UNFRIEND") {
+        console.log("unfriend is running");
+        console.log();
+        // state = {
+        //     ...friends,
+        //     unfriend: action.unfriend
+        // };
+    }
 }
-
-//this is the corresponding stetement in the reducer that is the same like the typr in actions.js
-
-// with redux we skip the props etc

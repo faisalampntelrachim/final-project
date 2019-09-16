@@ -166,6 +166,23 @@ exports.deleteFriend = function(receiver_id, sender_id) {
         )
         .then(({ rows }) => rows);
 };
+
+//friends list
+exports.addFriendsList = function(id, first, last, image, accepted) {
+    return db
+        .query(
+            `
+            SELECT users.id, first, last, imageurl, accepted
+            FROM friendships
+            JOIN users
+            ON (accepted = false AND receiver_id = $1 AND sender_id = users.id)
+            OR (accepted = true AND receiver_id = $1 AND sender_id = users.id)
+            OR (accepted = true AND sender_id = $1 AND receiver_id = users.id)
+            `,
+            [id, first, last, image, accepted]
+        )
+        .then(({ rows }) => rows);
+};
 // REFERENCES it guarantes for every receiver user there is an id
 
 //that will give all of the rows between the users

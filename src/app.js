@@ -7,7 +7,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import OtherProfile from "./otherprofile";
 import FindUsers from "./findusers";
 // import CuteAnimals from "./cuteanimals";
-// import FriendButton from "./friendbutton";
+import Friends from "./friends";
 
 export default class App extends React.Component {
     constructor() {
@@ -125,6 +125,7 @@ export default class App extends React.Component {
                         />
                     )}
                 />
+                <Route exact path="/friends" render={() => <Friends />} />
             </BrowserRouter>
         );
     }

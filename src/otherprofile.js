@@ -10,6 +10,7 @@ export default class OtherProfile extends React.Component {
     componentDidMount() {
         console.log("App mounted");
         const id = this.props.match.params.id;
+
         axios
             .get("/users/" + id)
             .then(response => {
@@ -17,23 +18,33 @@ export default class OtherProfile extends React.Component {
                     "axios get users with match.params.id:",
                     response.data
                 );
-                // if (response.data != null) {
-                //     response.data[0].first;
-                //     response.data[0].last;
-                //     response.data[0].imageurl;
-                //     response.data[0].bio;
+                if (response.data.resp.length == 0) {
+                    this.props.history.push("/");
+                }
+                // console.log("resp.data", response.data[0].id);
+                console.log("the id is:", id);
+                if (response.data.userId == id) {
+                    console.log("");
+                    this.props.history.push("/");
+                }
                 if (response.data.success == false) {
+                    //     response.data[0].first;
+                    //     response.data[0].last;
+                    //     response.data[0].imageurl;
+                    //     response.data[0].bio;
+                    // if (id == this.props.id) {
+                    //     this.props.history.push("/");
+                    // }
                     this.props.history.push("/");
                 } else {
                     this.setState({
-                        first: response.data[0].first,
-                        last: response.data[0].last,
-                        imageurl: response.data[0].imageurl,
-                        bio: response.data[0].bio
+                        first: response.data.resp[0].first,
+                        last: response.data.resp[0].last,
+                        imageurl: response.data.resp[0].imageurl,
+                        bio: response.data.resp[0].bio
                     });
                 }
             })
-
             .catch(err => {
                 console.log("err get /users/:id", err);
             });

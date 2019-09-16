@@ -168,7 +168,7 @@ exports.deleteFriend = function(receiver_id, sender_id) {
 };
 
 //friends list
-exports.addFriendsList = function(id, first, last, image, accepted) {
+exports.addFriendsList = function(sender_id) {
     return db
         .query(
             `
@@ -179,7 +179,7 @@ exports.addFriendsList = function(id, first, last, image, accepted) {
             OR (accepted = true AND receiver_id = $1 AND sender_id = users.id)
             OR (accepted = true AND sender_id = $1 AND receiver_id = users.id)
             `,
-            [id, first, last, image, accepted]
+            [sender_id]
         )
         .then(({ rows }) => rows);
 };

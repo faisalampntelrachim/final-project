@@ -24,10 +24,12 @@ export default class OtherProfile extends React.Component {
                 // console.log("resp.data", response.data[0].id);
                 console.log("the id is:", id);
                 if (response.data.userId == id) {
-                    console.log("");
+                    //not to be able to go to my profile and add my self
+                    // console.log("");
                     this.props.history.push("/");
                 }
                 if (response.data.success == false) {
+                    //if it doesn't exist what i'm typing on the url
                     //     response.data[0].first;
                     //     response.data[0].last;
                     //     response.data[0].imageurl;

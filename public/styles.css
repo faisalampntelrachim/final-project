@@ -1,7 +1,9 @@
 body {
     background-color: teal;
 }
-
+header {
+    background-color: yellow;
+}
 header img {
     float: right;
     height: 50px;

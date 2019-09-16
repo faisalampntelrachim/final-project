@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const compression = require("compression");
 const db = require("./utils/db.js");
+// const server = require('http').Server(app);
+// const io = require('socket.io')(server, { origins: 'localhost:8080' });
 // const bc = require("./utils/bc");
 const { hash, compare } = require("./utils/bc");
 const cookieSession = require("cookie-session");
@@ -325,17 +327,17 @@ app.post("/unfriend/:id", (req, res) => {
 });
 
 //1 GET friends and 2 POST  below
-// app.get("/friends-wannabes", (req, res) => {
-//     console.log("GET/friends-wannabes is running");
-//     db.addFriendsList(req.params.id, req.session.userId) ///maybe req.session.userId
-//         .then(resp => {
-//             console.log("The resp in app.get /friends-wannabes is:", resp[0]);
-//             res.json(resp);
-//             // console.log("resp:", resp);
-//         });
-// });
+app.get("/friends-wannabes", (req, res) => {
+    console.log("GET/friends-wannabes is running");
+    db.addFriendsList(req.session.userId) ///maybe req.session.userId
+        .then(resp => {
+            console.log("The resp in app.get /friends-wannabes is:", resp);
+            res.json(resp);
+            // console.log("resp:", resp);
+        });
+});
 
-// POST in accept in friends list
+//POST in accept in friends list
 // app.post("/acceptfriend", (req, res) => {
 //     console.log("The app.post /acceptfriendfriend is:", req.params.id);
 //     db.acceptFriend(req.params.id, req.session.userId)

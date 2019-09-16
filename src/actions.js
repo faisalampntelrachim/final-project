@@ -1,28 +1,31 @@
 import axios from "./axios";
 
-export function receiveFriendsWannabes() {
-    axios.get("/friends-wannabes").then(({ data }) => {
-        console.log("friends-wannabes:", data);
-        return {
-            type: "RECEIVE_FRIENDS_WANNABES",
-            id: data
-        };
-    });
+export async function receiveFriendsWannabes() {
+    console.log("actions receive Friends is working");
+    const { data } = await axios.get("/friends-wannabes");
+    console.log("the data is:", data);
+    return {
+        type: "RECEIVE_FRIENDS_WANNABES",
+        friends: data
+    };
 }
-
-export function acceptFriendRequest() {
-    axios.post("/acceptfriend").then(({ data }) => {
+export function acceptFriendRequest(id) {
+    console.log("actions acceptFriends  is working");
+    axios.post("/acceptfriend/" + id).then(({ data }) => {
         console.log("accept friend:", data);
         return {
-            type: "ACCEPT_FRIEND_REQUEST"
+            type: "ACCEPT_FRIEND_REQUEST",
+            id
         };
     });
 }
-export function unfriend() {
-    axios.post("/unfriend").then(({ data }) => {
+export function unfriend(id) {
+    console.log("actions unfriend  is working");
+    axios.post("/unfriend/" + id).then(({ data }) => {
         console.log("unfriend:", data);
         return {
-            type: "UNFRIEND"
+            type: "UNFRIEND",
+            id
         };
     });
 }

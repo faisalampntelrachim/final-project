@@ -3,11 +3,12 @@ import Profile from "./profile";
 import Profilepic from "./profilepic";
 import { Uploader } from "./uploader";
 import axios from "./axios";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Link } from "react-router-dom";
 import OtherProfile from "./otherprofile";
 import FindUsers from "./findusers";
 // import CuteAnimals from "./cuteanimals";
 import Friends from "./friends";
+import { Chat } from "./chat";
 
 export default class App extends React.Component {
     constructor() {
@@ -70,15 +71,18 @@ export default class App extends React.Component {
                     <div>
                         <header>
                             <h1 onClick={this.showModal}></h1>
-
+                            <Link to="/friends">Friends</Link>
+                            <Link to="/users">Find users</Link>
+                            <Link to="/">Home</Link>
+                            <Link to="/chat">Chat</Link>
                             <img src="/socialnetwork.jpg" />
+                            <Profilepic
+                                first={this.state.first} // no comma here
+                                last={this.state.last}
+                                imageurl={this.state.imageurl}
+                                showModal={this.showModal}
+                            />
                         </header>
-                        <Profilepic
-                            first={this.state.first} // no comma here
-                            last={this.state.last}
-                            imageurl={this.state.imageurl}
-                            showModal={this.showModal}
-                        />
                     </div>
                     <Route
                         exact
@@ -126,6 +130,16 @@ export default class App extends React.Component {
                     )}
                 />
                 <Route exact path="/friends" render={() => <Friends />} />
+                <Route
+                    path="/chat"
+                    render={props => (
+                        <Chat
+                            key={props.match}
+                            match={props.match}
+                            history={props.history}
+                        />
+                    )}
+                />
             </BrowserRouter>
         );
     }
@@ -168,3 +182,5 @@ export default class App extends React.Component {
 // }
 
 // <img src="socialnetwork.jpg" />
+//<Route exact path="/chat" componenet={Chat} />
+//<Route exact path="/chat" componenet={Chat} />

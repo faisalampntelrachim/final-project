@@ -9,25 +9,23 @@ export async function receiveFriendsWannabes() {
         friends: data
     };
 }
-export function acceptFriendRequest(id) {
+export async function acceptFriendRequest(id) {
     console.log("actions acceptFriends  is working");
-    axios.post("/acceptfriend/" + id).then(({ data }) => {
-        console.log("accept friend:", data);
-        return {
-            type: "ACCEPT_FRIEND_REQUEST",
-            id
-        };
-    });
+    const { data } = await axios.post("/acceptfriend/" + id);
+    console.log("accept friend:", data);
+    return {
+        type: "ACCEPT_FRIEND_REQUEST",
+        id
+    };
 }
-export function unfriend(id) {
+export async function unfriend(id) {
     console.log("actions unfriend  is working");
-    axios.post("/unfriend/" + id).then(({ data }) => {
-        console.log("unfriend:", data);
-        return {
-            type: "UNFRIEND",
-            id
-        };
-    });
+    const { data } = await axios.post("/unfriend/" + id);
+    console.log("unfriend:", data);
+    return {
+        type: "UNFRIEND",
+        id
+    };
 }
 // export function example() {
 //     return {

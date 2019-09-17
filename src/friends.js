@@ -32,8 +32,8 @@ export default function Friends() {
 
     return (
         <div id="Friends">
-            <h1>These people want to be your friends</h1>
             <div className="friendscomponent">
+                <h1>These people want to be your friends</h1>
                 <ul>
                     {friends &&
                         friends.map(users => (
@@ -46,7 +46,7 @@ export default function Friends() {
                                 </li>
                                 <button
                                     onClick={() => {
-                                        dispatch(unfriend(friends[0].id));
+                                        dispatch(unfriend(users.id));
                                     }}
                                 >
                                     unfriend
@@ -54,31 +54,34 @@ export default function Friends() {
                             </div>
                         ))}
                 </ul>
-                <ul>
-                    {wannabes &&
-                        wannabes.map(users => (
-                            <div key={users.id}>
-                                <li>
-                                    <img src={users.imageurl} />
-                                    <h3>
-                                        {users.first} {users.last}
-                                    </h3>
-                                    <h3>{users.bio}</h3>
-                                    <button
-                                        onClick={() => {
-                                            dispatch(
-                                                acceptFriendRequest(
-                                                    friends[0].id
-                                                )
-                                            );
-                                        }}
-                                    >
-                                        Add friend
-                                    </button>
-                                </li>
-                            </div>
-                        ))}
-                </ul>
+                <div>
+                    <h1>Pending friend requests</h1>
+                    <ul>
+                        {wannabes &&
+                            wannabes.map(users => (
+                                <div key={users.id}>
+                                    <li>
+                                        <img src={users.imageurl} />
+                                        <h3>
+                                            {users.first} {users.last}
+                                        </h3>
+                                        <h3>{users.bio}</h3>
+                                        <button
+                                            onClick={() => {
+                                                dispatch(
+                                                    acceptFriendRequest(
+                                                        users.id
+                                                    )
+                                                );
+                                            }}
+                                        >
+                                            Add friend
+                                        </button>
+                                    </li>
+                                </div>
+                            ))}
+                    </ul>
+                </div>
                 <img src={friends.imageurl} />
             </div>
         </div>

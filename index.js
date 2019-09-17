@@ -8,6 +8,8 @@ const db = require("./utils/db.js");
 const { hash, compare } = require("./utils/bc");
 const cookieSession = require("cookie-session");
 const csurf = require("csurf");
+const server = require("http").Server(app);
+const io = require("socket.io")(server, { origins: "localhost:8080" });
 
 const s3 = require("./s3");
 const config = require("./config");
@@ -41,18 +43,47 @@ app.use(express.json()); // i   forgot only that and I couldn't redirect!!!
 
 app.use(express.static("./public")); //How can I render an img with commenting that out???
 
-app.use(
-    cookieSession({
-        maxAge: 1000 * 60 * 60 * 24 * 365.25 * 1000,
-        secret:
-            process.env.NODE_ENV == "production"
-                ? process.env.SESS_SECRET
-                : require("./secrets").sessionSecret
-    })
-);
+// app.use(
+//     cookieSession({
+//         maxAge: 1000 * 60 * 60 * 24 * 365.25 * 1000,
+//         secret:
+//             process.env.NODE_ENV == "production"
+//                 ? process.env.SESS_SECRET
+//                 : require("./secrets").sessionSecret
+//     })
+// );
 
+//for part 9
+// const cookieSessionMiddleware = cookieSession({
+//     maxAge: 1000 * 60 * 60 * 24 * 365.25 * 1000,
+//    v
+// });
+// // maxAge: 1000 * 60 * 60 * 24 * 365.25 * 1000,
+// process.env.NODE_ENV == "production"
+//     ? process.env.SESS_SECRET
+//     : require("./secrets").sessionSecret;
+// io.use(function(socket, next) {
+//     cookieSessionMiddleware(socket.request, socket.request.res, next);
+// });
+
+// const cookieSession = require('cookie-session');
+console.log("made it here");
+const cookieSessionMiddleware = cookieSession({
+    secret:
+        process.env.NODE_ENV == "production"
+            ? process.env.SESS_SECRET
+            : require("./secrets").sessionSecret,
+    maxAge: 1000 * 60 * 60 * 24 * 90
+});
+
+app.use(cookieSessionMiddleware);
+
+io.use(function(socket, next) {
+    cookieSessionMiddleware(socket.request, socket.request.res, next);
+});
+//////
+// console.log(csurf);
 app.use(csurf());
-//
 app.use(function(req, res, next) {
     res.cookie("mytoken", req.csrfToken());
     next();
@@ -377,6 +408,40 @@ app.get("*", function(req, res) {
     res.sendFile(__dirname + "/index.html");
 });
 
-app.listen(8080, function() {
+server.listen(8080, function() {
     console.log("I'm listening.");
 });
+
+//SERVER SIDE SOCKET CODE //
+io.on("connection", function(socket) {
+    if (!socket.request.session.userId) {
+        //IF the user is not loggedin then disconnect
+        return socket.disconnect(true);
+    }
+
+    const userId = socket.request.session.userId;
+
+    socket.on("My amazing chat message", msg => {
+        console.log("message received!");
+        console.log("and this is the message:", msg);
+        io.sockets.emit("message from server", msg);
+    });
+
+    /* ... */
+
+    //1.we need 2 things in here...
+    // we need to make a DB query ...to get  the last 10 messages...
+    //db.getLastTenMessages().then(data=>{
+    //here is where we EMIT those chat messages...
+    //something i like...
+    //io.sockets.emit('chat messages',data.rows) I must console.log first
+    //})
+});
+
+//2.Deal with new chat message...
+//socket.io('new message',(callback)=>{
+// i. get all the info about the user  i.e a db query.
+//ii. add chat message to DB.
+//iii. could create a chat message object or use the data from  above query
+//iv. io.sockets.emit('new chat message')
+// })

@@ -55,9 +55,7 @@ export default class OtherProfile extends React.Component {
         return (
             <div className="otherprofile">
                 <div className="other">
-                    <header>
-                        <h1 onClick={this.showModal}></h1>
-                    </header>
+                    <h1 onClick={this.showModal}></h1>
                 </div>
 
                 <img src={this.state.imageurl} />

@@ -3,10 +3,22 @@ body {
 }
 header {
     background-color: yellow;
+    margin-top: 0px;
+    height: 100px;
+    display: flex;
+    /* align-items: center; */
+    /* justify-content: space-between; */
+}
+a {
+    /* height: 20px; */
+    /* display: flex;
+    align-items: center; */
+    margin-left: 40px;
+    margin-right: 40px;
 }
 header img {
-    float: right;
-    height: 50px;
+    float: left;
+    height: 100px;
 }
 .welcomeimg img {
     height: 400px;
@@ -21,7 +33,10 @@ header img {
 .profilepiccomponent img {
     /* float: right; */
     top: 0%;
-    height: 50px;
+    height: 100px;
+}
+.profilepic {
+    text-shadow: 2px 2px #ff0000;
 }
 .profilepic img {
     height: 300px;
@@ -33,4 +48,9 @@ header img {
 .otherprofile img {
     height: 250px;
     width: 250px;
+}
+
+.chat-messages {
+    height: 300px;
+    overflow-y: scroll;
 }

@@ -13,8 +13,8 @@ export default function Profile({
 }) {
     return (
         <div className="profilepic">
+            <h1>Hey!</h1>
             <h1>
-                Hey!
                 {first} {last}
             </h1>
             <ProfilePic

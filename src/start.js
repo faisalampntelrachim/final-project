@@ -8,6 +8,7 @@ import { createStore, applyMiddleware } from "redux";
 import reduxPromise from "redux-promise";
 import { composeWithDevTools } from "redux-devtools-extension";
 import reducer from "./reducer";
+import { init } from "./socket";
 
 const store = createStore(
     reducer,
@@ -20,6 +21,7 @@ if (location.pathname === "/welcome") {
     // if user is on /welcome route, that means user is NOT logged in
     // and we should render the Registration component.
 } else {
+    init(store);
     elem = (
         <Provider store={store}>
             <App />

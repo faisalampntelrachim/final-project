@@ -14,7 +14,7 @@ export default function reducer(state = {}, action) {
         console.log("accept friend is running");
         state = {
             ...state,
-            users: state.users.map(user => {
+            friends: state.friends.map(user => {
                 if (user.id != action.id) {
                     return user;
                 } else {
@@ -36,7 +36,7 @@ export default function reducer(state = {}, action) {
         console.log("the state is:", state);
         state = {
             ...state,
-            friends: action.friends.filter(friends => friends.accepted == false)
+            friends: state.friends.filter(friends => friends.id != action.id)
         };
         // state = {
         //     ...state,

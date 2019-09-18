@@ -183,6 +183,45 @@ exports.addFriendsList = function(sender_id) {
         )
         .then(({ rows }) => rows);
 };
+
+// to get the last 10 ten messages
+exports.getTenLastMessages = function() {
+    return db
+        .query(
+            `SELECT
+            users.imageurl,
+            users.first,
+            users.last,
+            chat.message,
+            chat.posted_date
+            FROM chat
+            JOIN users
+            ON users.id = chat.sender_id
+            ORDER BY
+            chat.created_at DESC
+            LIMIT 10
+            `
+        )
+        .then(({ rows }) => {
+            console.log("this rows are:", rows);
+            return rows;
+        });
+};
+// to enter a new comment to the textarea and to update everything and create a new row with that comment
+exports.addNewChatComments = function(sender_id, message) {
+    return db
+        .query(
+            `INSERT
+            INTO chat
+            ( sender_id,message)
+            VALUES ($1, $2)
+            `,
+            [sender_id, message]
+        )
+        .then(({ rows }) => {
+            return rows;
+        });
+};
 // REFERENCES it guarantes for every receiver user there is an id
 
 //that will give all of the rows between the users

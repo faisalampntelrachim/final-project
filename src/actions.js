@@ -27,6 +27,34 @@ export async function unfriend(id) {
         id
     };
 }
+
+//to get the new messages
+export function chatMessages(msgs) {
+    console.log("chat messages  is working");
+    console.log("The msgs in actions is:", msgs);
+    return {
+        type: "GET_LAST_TEN_MESSAGES",
+        chatMessages: msgs
+    };
+}
+
+//to get the new message
+export function chatMessage(msg) {
+    console.log("chat messages  is working");
+    console.log("The msg in actions is:", msg);
+    return {
+        type: "GET_NEW_MESSAGES",
+        chatMessage: msg
+    };
+}
+// export function chatMessage(msg) {
+//     console.log("chat messages  is working");
+//     console.log("msgs:", msgs);
+//     return {
+//         type: "GET_LAST_TEN_MESSAGES",
+//         chatMessages: msgs
+//     };
+// }
 // export function example() {
 //     return {
 //         // the object that returns is the action and must have at least one property and that is type.

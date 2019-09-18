@@ -19,6 +19,7 @@ export default class OtherProfile extends React.Component {
                     response.data
                 );
                 if (response.data.resp.length == 0) {
+                    //not existing profile
                     this.props.history.push("/");
                 }
                 // console.log("resp.data", response.data[0].id);

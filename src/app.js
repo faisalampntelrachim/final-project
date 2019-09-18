@@ -75,6 +75,7 @@ export default class App extends React.Component {
                             <Link to="/users">Find users</Link>
                             <Link to="/">Home</Link>
                             <Link to="/chat">Chat</Link>
+
                             <img src="/socialnetwork.jpg" />
                             <Profilepic
                                 first={this.state.first} // no comma here

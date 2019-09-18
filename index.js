@@ -368,41 +368,10 @@ app.get("/friends-wannabes", (req, res) => {
         });
 });
 
-//POST in accept in friends list
-// app.post("/acceptfriend", (req, res) => {
-//     console.log("The app.post /acceptfriendfriend is:", req.params.id);
-//     db.acceptFriend(req.params.id, req.session.userId)
-//         .then(resp => {
-//             console.log(
-//                 "The resp in app.post/acceptfriend in friends list is:",
-//                 resp
-//             );
-//             console.log("resp:", resp);
-//             res.json(resp);
-//         })
-//         .catch(e => {
-//             console.log(
-//                 "The err in app.post acceptfriend in friends list is:",
-//                 e
-//             );
-//         });
-// });
-//POST in unfriend in friends list
-// app.post("/unfriend", (req, res) => {
-//     console.log("The app.post /unfriend is:", req.params.id);
-//     db.deleteFriend(req.params.id, req.session.userId)
-//         .then(resp => {
-//             console.log(
-//                 "The resp in app.post/unfriend in friends list is:",
-//                 resp
-//             );
-//             console.log("resp:", resp);
-//             res.json(resp);
-//         })
-//         .catch(e => {
-//             console.log("The err in app.post unfriend in friends list is:", e);
-//         });
-// });
+app.get("/logout", (req, res) => {
+    req.session = null;
+    res.redirect("/register");
+});
 //This route needs to  be last
 app.get("*", function(req, res) {
     res.sendFile(__dirname + "/index.html");
@@ -413,7 +382,16 @@ server.listen(8080, function() {
 });
 
 //SERVER SIDE SOCKET CODE //
+//1.we need 2 things in here...
+// we need to make a DB query ...to get  the last 10 messages...
+//db.getLastTenMessages().then(data=>{
+//here is where we EMIT those chat messages...
+//something i like...
+//io.sockets.emit('chat messages',data.rows) I must console.log first
+//})
+
 io.on("connection", function(socket) {
+    console.log(`a socket with the id ${socket.id} just connected`);
     if (!socket.request.session.userId) {
         //IF the user is not loggedin then disconnect
         return socket.disconnect(true);
@@ -421,21 +399,27 @@ io.on("connection", function(socket) {
 
     const userId = socket.request.session.userId;
 
-    socket.on("My amazing chat message", msg => {
+    socket.on("chat message", msg => {
+        //in socket.on i put the query when somebody types a new comment
         console.log("message received!");
         console.log("and this is the message:", msg);
-        io.sockets.emit("message from server", msg);
+
+        db.addNewChatComments(userId, msg).then(data => {
+            console.log("addNewChatComments in index is:", msg);
+            io.sockets.emit("new chat message", data); //message from frontend ? maybe
+        });
+        // io.sockets.emit("message from server", msg); //i must ask tomorrow for that!
+        // will pass it to sockets.js .This is msg from the server
     });
 
-    /* ... */
+    db.getTenLastMessages().then(data => {
+        console.log("get ten last messages", data);
+        // io.sockets.emit("tenMessages", data);
+        io.sockets.emit("ten messages from server", data);
 
-    //1.we need 2 things in here...
-    // we need to make a DB query ...to get  the last 10 messages...
-    //db.getLastTenMessages().then(data=>{
-    //here is where we EMIT those chat messages...
-    //something i like...
-    //io.sockets.emit('chat messages',data.rows) I must console.log first
-    //})
+        // db.getTenLastMessages().then(data => {
+        //     io.sockets.emit("chat messages", data);
+    });
 });
 
 //2.Deal with new chat message...
@@ -445,3 +429,10 @@ io.on("connection", function(socket) {
 //iii. could create a chat message object or use the data from  above query
 //iv. io.sockets.emit('new chat message')
 // })
+// io.on("connection", function(socket) {
+//     if (!socket.request.session.userId) {
+//         db.getMessages().then(data=>{
+//             io.sockets.emit('chat messages',data.rows)
+//         //IF the user is not loggedin then disconnect
+//         return socket.disconnect(true);
+//     }

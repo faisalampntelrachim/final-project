@@ -53,9 +53,9 @@ export default function FindUsers() {
 
     return (
         <div>
-            <h1>Find People</h1>
+            <h1>Find Users</h1>
             <input onChange={onChange} defaultValue={search} />
-            <button onClick={onSearchClick}> Search</button>
+
             <div>
                 <ul>
                     {users.map(users => (
@@ -74,3 +74,6 @@ export default function FindUsers() {
         </div>
     );
 }
+
+//this is under the input
+// <button onClick={onSearchClick}> Search</button>

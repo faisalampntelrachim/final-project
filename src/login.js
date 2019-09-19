@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "./axios"; //this is file not a module
+import { Link } from "react-router-dom";
 // import Registration from "./registration";
 // import { HashRouter, Route } from "react-router-dom";
 
@@ -45,7 +46,7 @@ export default class Login extends React.Component {
     }
     render() {
         return (
-            <div>
+            <div className="login">
                 {this.state.error && <p>Oops wrong!Try again!</p>}
                 <h1> Welcome to the Social network</h1>
                 <form onSubmit={this.handleSubmit}>
@@ -63,6 +64,7 @@ export default class Login extends React.Component {
                     <h2> Please Log in Here</h2>
                     <button onSubmit={this.handleSubmit}>Log in</button>
                 </form>
+                <Link to="/">Register</Link>
             </div>
         );
     }

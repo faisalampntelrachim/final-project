@@ -73,7 +73,7 @@ export default class App extends React.Component {
                             <h1 onClick={this.showModal}></h1>
                             <Link to="/friends">Friends</Link>
                             <Link to="/users">Find users</Link>
-                            <Link to="/">Home</Link>
+                            <Link to="/">Profile</Link>
                             <Link to="/chat">Chat</Link>
 
                             <img src="/socialnetwork.jpg" />

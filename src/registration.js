@@ -51,7 +51,7 @@ export default class Registration extends React.Component {
     }
     render() {
         return (
-            <div>
+            <div className="registration">
                 {this.state.error && <p>Oops wrong!Try again!</p>}
                 <h1> Welcome to the Social network</h1>
                 <form onSubmit={this.handleSubmit}>
@@ -60,16 +60,19 @@ export default class Registration extends React.Component {
                         placeholder="first"
                         onChange={this.handleChange}
                     />
+                    <br />
                     <input
                         name="last"
                         placeholder="last"
                         onChange={this.handleChange}
                     />
+                    <br />
                     <input
                         name="email"
                         placeholder="email"
                         onChange={this.handleChange}
                     />
+                    <br />
                     <input
                         name="password"
                         placeholder="password"

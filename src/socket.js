@@ -11,9 +11,11 @@ export const init = store => {
         //     console.log('GOT message from the front end and About to start redux stuff by dispatching in action');
         // }
 
-        socket.on("ten messages from server", (
-            msgs //1st argument must be the same like the io.sockets.emit in index.js
-        ) => store.dispatch(chatMessages(msgs)));
+        socket.on("ten messages from server", msgs => {
+            //1st argument must be the same like the io.sockets.emit in index.js
+            console.log("The msgs in socket is:", msgs);
+            store.dispatch(chatMessages(msgs));
+        });
 
         socket.on("new chat message", msg => {
             console.log("The msg in socket is:", msg);

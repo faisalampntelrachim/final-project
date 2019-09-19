@@ -31,81 +31,51 @@ export default function Friends() {
     }
 
     return (
-        <div id="Friends">
-            <div className="friendscomponent">
-                <h1>These people want to be your friends</h1>
-                <ul>
-                    {friends &&
-                        friends.map(users => (
-                            <div key={users.id}>
-                                <li>
-                                    <img src={users.imageurl} />
-                                    <h3>
-                                        {users.first} {users.last}
-                                    </h3>
-                                </li>
-                                <button
-                                    onClick={() => {
-                                        dispatch(unfriend(users.id));
-                                    }}
-                                >
-                                    unfriend
-                                </button>
-                            </div>
-                        ))}
-                </ul>
-                <div>
-                    <h1>Pending friend requests</h1>
-                    <ul>
-                        {wannabes &&
-                            wannabes.map(users => (
-                                <div key={users.id}>
-                                    <li>
-                                        <img src={users.imageurl} />
-                                        <h3>
-                                            {users.first} {users.last}
-                                        </h3>
-                                        <h3>{users.bio}</h3>
-                                        <button
-                                            onClick={() => {
-                                                dispatch(
-                                                    acceptFriendRequest(
-                                                        users.id
-                                                    )
-                                                );
-                                            }}
-                                        >
-                                            Add friend
-                                        </button>
-                                    </li>
-                                </div>
-                            ))}
-                    </ul>
-                </div>
-                <img src={friends.imageurl} />
+        <div className="whatever">
+            <h1>These people want to be your friends</h1>
+
+            <div className="friends">
+                {friends &&
+                    friends.map(users => (
+                        <div key={users.id}>
+                            <img src={users.imageurl} />
+                            <h3>
+                                {users.first} {users.last}
+                            </h3>
+
+                            <button
+                                onClick={() => {
+                                    dispatch(unfriend(users.id));
+                                }}
+                            >
+                                unfriend
+                            </button>
+                        </div>
+                    ))}
+            </div>
+
+            <h1>Pending friend requests</h1>
+            <div className="pending-friends">
+                {wannabes &&
+                    wannabes.map(users => (
+                        <div key={users.id}>
+                            <img src={users.imageurl} />
+                            <h3>
+                                {users.first} {users.last}
+                            </h3>
+                            <h3>{users.bio}</h3>
+                            <button
+                                onClick={() => {
+                                    dispatch(acceptFriendRequest(users.id));
+                                }}
+                            >
+                                Add friend
+                            </button>
+                        </div>
+                    ))}
             </div>
         </div>
     );
 }
 // <div id="Friends">
-//     <div className="friendscomponent">
-//         <h1>These people want to be your friends</h1>
-//         <img src={friends[0].image} />
-//         <div className="buttons">
-//             <button
-//                 onClick={() => {
-//                     dispatch(acceptFriendRequest(friends[0].id));
-//                 }}
-//             >
-//                 Add friend
-//             </button>
-//             <button
-//                 onClick={() => {
-//                     dispatch(unfriend(friends[0].id));
-//                 }}
-//             >
-//                 Unfriend
-//             </button>
-//         </div>
-//     </div>
-// </div>
+// <img src={friends.imageurl} />

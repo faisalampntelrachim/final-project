@@ -49,14 +49,23 @@ export default function reducer(state = {}, action) {
     /////////////////////// to update the state and get new messages
     console.log("GET_NEW_MESSAGES in reducer is running");
     if (action.type === "GET_NEW_MESSAGES") {
-        console.log("reducer for chat  is running");
+        console.log(
+            "reducer for new message in chat  is running",
+            action.chatMessage
+        );
         state = {
             ...state,
-            chatMessages: [...state.chatMessages, action.chatMessage[0]] // i can't add an array inside an array thats why is chatMessage[0]
+            // ...state.chatMessages,
+            // chatMessages: [...state.chatMessages, action.chatMessage[0]]
+            chatMessages: [...state.chatMessages, action.chatMessage]
+            // chatMessages: action.chatMessages[0]
+
+            // chatMessages: [...state.chatMessages, action.chatMessage[0]] // i can't add an array inside an array thats why is chatMessage[0]
         };
+        console.log("the state in get new messages", state);
         // friendsWannabes: [state],
         // receiveFriendsWannabes: action.receiveFriendsWannabes
     }
-    console.log("the state is:", state);
+    // console.log("the state is:", state);
     return state;
 }

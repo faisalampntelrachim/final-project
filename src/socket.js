@@ -15,6 +15,10 @@ export const init = store => {
             msgs //1st argument must be the same like the io.sockets.emit in index.js
         ) => store.dispatch(chatMessages(msgs)));
 
-        socket.on("new chat message", msg => store.dispatch(chatMessage(msg)));
+        socket.on("new chat message", msg => {
+            console.log("The msg in socket is:", msg);
+            store.dispatch(chatMessage(msg));
+            // console.log("The msg in socket is:", msg);
+        });
     }
 };

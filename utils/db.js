@@ -215,6 +215,7 @@ exports.addNewChatComments = function(sender_id, message) {
             INTO chat
             ( sender_id,message)
             VALUES ($1, $2)
+            RETURNING *
             `,
             [sender_id, message]
         )

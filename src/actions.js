@@ -28,7 +28,7 @@ export async function unfriend(id) {
     };
 }
 
-//to get the new messages
+//to get the 10 messages
 export function chatMessages(msgs) {
     console.log("chat messages  is working");
     console.log("The msgs in actions is:", msgs);

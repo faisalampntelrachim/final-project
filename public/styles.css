@@ -51,15 +51,19 @@ header img {
     width: 250px;
 }
 .chat {
+    /* display: flex;
+    align-items: center; */
     background-color: gray;
     border: 1px solid black;
     margin: 15px;
+    width: 500px;
     /* height: 120px; */
 }
 .chat img {
     height: 50px;
 }
 .chat-messages {
+    /* align-items: center; */
     overflow-y: scroll;
 }
 .chat-messages textarea {

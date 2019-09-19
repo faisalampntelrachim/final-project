@@ -405,8 +405,22 @@ io.on("connection", function(socket) {
         console.log("and this is the message:", msg);
 
         db.addNewChatComments(userId, msg).then(data => {
-            console.log("addNewChatComments in index is:", msg);
-            io.sockets.emit("new chat message", data); //message from frontend ? maybe
+            // console.log("get user for chat ");
+
+            db.addUsersInfo(userId).then(result => {
+                console.log("get users info for chat ", result[0].last); //i must access correct the object
+                var info = {
+                    first: result[0].first,
+                    last: result[0].last,
+                    imageurl: result[0].imageurl,
+                    created_at: result[0].created_at,
+                    message: msg
+                };
+
+                data.reverse();
+                console.log("addNewChatComments in index is:", info);
+                io.sockets.emit("new chat message", info);
+            });
         });
         // io.sockets.emit("message from server", msg); //i must ask tomorrow for that!
         // will pass it to sockets.js .This is msg from the server
@@ -415,6 +429,7 @@ io.on("connection", function(socket) {
     db.getTenLastMessages().then(data => {
         console.log("get ten last messages", data);
         // io.sockets.emit("tenMessages", data);
+        data.reverse();
         io.sockets.emit("ten messages from server", data);
 
         // db.getTenLastMessages().then(data => {

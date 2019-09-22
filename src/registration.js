@@ -38,7 +38,7 @@ export default class Registration extends React.Component {
             .then(resp => {
                 console.log("resp from post/logo:", resp);
                 if (resp.data.success) {
-                    location.replace("/app");
+                    location.replace("/");
                 } else {
                     this.setState({
                         error: true
@@ -53,7 +53,7 @@ export default class Registration extends React.Component {
         return (
             <div className="registration">
                 {this.state.error && <p>Oops wrong!Try again!</p>}
-                <h1> Welcome to the Social network</h1>
+                <h1>Tour guides all over Berlin</h1>
                 <form onSubmit={this.handleSubmit}>
                     <input
                         name="first"

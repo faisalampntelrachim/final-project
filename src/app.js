@@ -75,7 +75,7 @@ export default class App extends React.Component {
                             <Link to="/users">Find users</Link>
                             <Link to="/">Profile</Link>
                             <Link to="/chat">Chat</Link>
-
+                            <a href="/logout">Log out</a>
                             <img src="/socialnetwork.jpg" />
                             <Profilepic
                                 first={this.state.first} // no comma here
@@ -181,7 +181,7 @@ export default class App extends React.Component {
 //         );
 //     }
 // }
-
+// a link doesn't work with LINK i must use href because is SPA and it will only refresh the page and not redirect me somewhere
 // <img src="socialnetwork.jpg" />
 //<Route exact path="/chat" componenet={Chat} />
 //<Route exact path="/chat" componenet={Chat} />

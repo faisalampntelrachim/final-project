@@ -33,7 +33,7 @@ export default class Login extends React.Component {
             .then(resp => {
                 console.log("resp from axios post/login:", resp);
                 if (resp.data.success) {
-                    location.replace("/logo");
+                    location.replace("/");
                 } else {
                     this.setState({
                         error: true
@@ -48,7 +48,7 @@ export default class Login extends React.Component {
         return (
             <div className="login">
                 {this.state.error && <p>Oops wrong!Try again!</p>}
-                <h1> Welcome to the Social network</h1>
+                <h1>Tour guides all over Berlin</h1>
                 <form onSubmit={this.handleSubmit}>
                     <input
                         name="email"

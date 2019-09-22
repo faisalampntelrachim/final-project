@@ -26,7 +26,7 @@ export function Chat() {
         console.log("client height is:", elemRef.current.clientHeight);
         elemRef.current.scrollTop =
             elemRef.current.scrollHeight - elemRef.current.clientHeight;
-    }, []);
+    }, [chatMessages]);
     return (
         <div className="main-chat">
             <div className="chat-messages" ref={elemRef}>

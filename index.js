@@ -370,7 +370,7 @@ app.get("/friends-wannabes", (req, res) => {
 
 app.get("/logout", (req, res) => {
     req.session = null;
-    res.redirect("/register");
+    res.redirect("/");
 });
 //This route needs to  be last
 app.get("*", function(req, res) {

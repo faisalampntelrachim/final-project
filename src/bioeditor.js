@@ -77,7 +77,7 @@ export default class BioEditor extends React.Component {
             if (this.props.bio != null) {
                 elem = (
                     <div>
-                        <h1>Add your bio!</h1>
+                        <h1>Add a tour!</h1>
                         {this.props.bio}
                         <button onClick={this.showBioEditor}>Add</button>
                     </div>

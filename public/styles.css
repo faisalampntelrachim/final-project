@@ -1,5 +1,5 @@
 body {
-    background-color: teal;
+    background-color: yellow;
     background-size: 100%;
     display: flex;
     flex-direction: column;
@@ -12,11 +12,20 @@ body {
 .registration p {
     color: maroon;
 }
+.registration h1,
+h2 {
+    font-family: "Almendra SC", serif;
+}
+
+.login h1,
+h2 {
+    font-family: "Almendra SC", serif;
+}
 .login p {
     color: maroon;
 }
 header {
-    background-color: darkkhaki;
+    background-color: blue;
     margin-top: 0px;
     height: 100px;
     display: flex;
@@ -35,7 +44,6 @@ a {
 header img {
     float: left;
     height: 100px;
-    /* max-width: 800px; */
 }
 .welcomeimg {
     display: flex;
@@ -45,7 +53,7 @@ header img {
 }
 .welcomeimg img {
     height: 400px;
-    width: 400px;
+    width: 800px;
 }
 .main img {
     height: 300px;
@@ -76,7 +84,7 @@ header img {
     display: flex;
     align-items: center;
     flex-direction: column;
-    text-shadow: 2px 2px #ff0000;
+    text-shadow: 2px 2px blue;
     /* text-shadow: 14px black; */
 }
 .profilepic img {
@@ -106,6 +114,7 @@ header img {
     height: 50px;
 }
 .chat-messages {
+    height: 500px;
     align-items: center;
     overflow-y: scroll;
 }

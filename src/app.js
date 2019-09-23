@@ -9,6 +9,7 @@ import FindUsers from "./findusers";
 // import CuteAnimals from "./cuteanimals";
 import Friends from "./friends";
 import { Chat } from "./chat";
+import { Panel } from "./panel";
 
 export default class App extends React.Component {
     constructor() {
@@ -72,11 +73,11 @@ export default class App extends React.Component {
                         <header>
                             <h1 onClick={this.showModal}></h1>
                             <Link to="/friends">Friends</Link>
-                            <Link to="/users">Find users</Link>
                             <Link to="/">Profile</Link>
                             <Link to="/chat">Chat</Link>
+                            <Link to="/panel">Offered and requested tours</Link>
                             <a href="/logout">Log out</a>
-                            <img src="/socialnetwork.jpg" />
+                            <img src="/Brandeburger-tor.jpg" />
                             <Profilepic
                                 first={this.state.first} // no comma here
                                 last={this.state.last}
@@ -141,6 +142,7 @@ export default class App extends React.Component {
                         />
                     )}
                 />
+                <Route exact path="/panel" render={() => <Panel />} />
             </BrowserRouter>
         );
     }
@@ -185,3 +187,4 @@ export default class App extends React.Component {
 // <img src="socialnetwork.jpg" />
 //<Route exact path="/chat" componenet={Chat} />
 //<Route exact path="/chat" componenet={Chat} />
+// <Link to="/users">Find users</Link>

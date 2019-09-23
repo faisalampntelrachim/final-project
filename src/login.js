@@ -48,7 +48,7 @@ export default class Login extends React.Component {
         return (
             <div className="login">
                 {this.state.error && <p>Oops wrong!Try again!</p>}
-                <h1>Tour guides all over Berlin</h1>
+                <h1>Discover Berlin</h1>
                 <form onSubmit={this.handleSubmit}>
                     <input
                         name="email"
@@ -69,21 +69,3 @@ export default class Login extends React.Component {
         );
     }
 }
-
-// render() {
-//     return(
-//         <HashRouter>
-//             <div>
-//                 <h1>Welcome to the Social Network</h1>
-//                 // <img src="/welcome.jpg" alt="Welcome"/>
-//             <HashRouter>
-//                     <div>
-//                         <Route path="/" component={Registration}/>
-//                         <Route path="/login" component={Login}/>
-//                         <Route path="/" component={LoginLink}/> // <Redirect path="*" to="/"/>
-//                     </div>
-//                     <Link to ="/login">Log in</Link>
-//                 </div>
-//         </HashRouter>
-//     );
-// }

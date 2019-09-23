@@ -223,6 +223,67 @@ exports.addNewChatComments = function(sender_id, message) {
             return rows;
         });
 };
+
+////new part with comments in panel componenet
+exports.getComments = function() {
+    return db
+        .query(
+            `SELECT comment,
+                    username,
+                    image_id,
+                    created_at
+            FROM comments
+            `
+        )
+        .then(({ rows }) => {
+            return rows;
+        });
+};
+//to add the comments
+exports.addComments = function(comment, username, image_id, created_at) {
+    console.log(" comments data");
+    return db
+        .query(
+            `INSERT INTO comments (comment, username, image_id, created_at)
+        VALUES ($1, $2, $3, $4)
+        RETURNING id,comment,username`,
+            [comment, username, image_id, created_at]
+        )
+        .then(({ rows }) => {
+            return rows[0];
+        });
+};
+
+exports.showComment = function(image_id) {
+    return db.query(
+        `SELECT comment,username,created_at
+        FROM comments
+         WHERE image_id=$1`,
+        [image_id]
+    );
+};
+
+//subquery for more button
+exports.moreButton = function(image_id) {
+    return db
+        .query(
+            `SELECT * , (
+    SELECT id
+    FROM images
+    ORDER BY id ASC
+    LIMIT 1
+) AS "lowestId"
+ FROM images
+WHERE id < $1
+ORDER BY id DESC
+LIMIT 6`,
+            [image_id]
+        )
+        .then(({ rows }) => {
+            return rows;
+        });
+};
+
 // REFERENCES it guarantes for every receiver user there is an id
 
 //that will give all of the rows between the users

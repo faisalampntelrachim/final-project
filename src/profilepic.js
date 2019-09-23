@@ -6,7 +6,7 @@ export default class Profilepic extends React.Component {
     }
     render() {
         console.log("imageurl:", this.props.imageurl);
-        let imageurl = this.props.imageurl || "/img/socialnetwork.jpg";
+        let imageurl = this.props.imageurl || "/img/Brandeburger-tor.jpg";
         console.log("image after: ||", this.props.imageurl);
         return (
             <div className="profilepiccomponent">

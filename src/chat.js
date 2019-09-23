@@ -52,25 +52,3 @@ export function Chat() {
         </div>
     );
 }
-//     return (
-//         <div className="chat">
-//             <h1>Chat Room!</h1>
-//             <div className="chat-messages" ref={elemRef}>
-//                 <p>Chat messages will go here</p>
-//                 <p>Chat messages will go here</p>
-//                 <p>Chat messages will go here</p>
-//                 <p>Chat messages will go here</p>
-//                 <p>Chat messages will go here</p>
-//                 <p>Chat messages will go here</p>
-//                 <p>Chat messages will go here</p>
-//                 <p>Chat messages will go here</p>
-//                 <p>Chat messages will go here</p>
-//                 <p>Chat messages will go here</p>
-//             </div>
-//             <textarea
-//                 placeholder="Add your message here"
-//                 onKeyDown={keyCheck}
-//             />
-//         </div>
-//     );
-// }

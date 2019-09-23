@@ -357,7 +357,7 @@ app.post("/unfriend/:id", (req, res) => {
         });
 });
 
-//1 GET friends and 2 POST  below
+//1 GET friends and finally not another 2 POST  below
 app.get("/friends-wannabes", (req, res) => {
     console.log("GET/friends-wannabes is running");
     db.addFriendsList(req.session.userId) ///maybe req.session.userId
@@ -368,6 +368,29 @@ app.get("/friends-wannabes", (req, res) => {
         });
 });
 
+//for comments in panel ///////////////////////////////
+app.get("/panel/:imageId", (req, res) => {
+    // console.log("comments get route");
+    console.log("Params in get params", req.params);
+    db.showComment(req.params.imageId).then(result => {
+        console.log("Result of the get comment params is: ", result);
+        res.json(result);
+    });
+});
+
+app.post("/panel/", (req, res) => {
+    const { comment, username, id } = req.body;
+    db.addComments(comment, username, id)
+        .then(result => {
+            console.log("The result in post comment", result);
+            res.json(result);
+        })
+        .catch(err => {
+            console.log("uploading comment error", err);
+        });
+});
+
+/////////////////////////////////////////
 app.get("/logout", (req, res) => {
     req.session = null;
     res.redirect("/");

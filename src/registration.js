@@ -53,7 +53,7 @@ export default class Registration extends React.Component {
         return (
             <div className="registration">
                 {this.state.error && <p>Oops wrong!Try again!</p>}
-                <h1>Tour guides all over Berlin</h1>
+                <h1>Discover Berlin</h1>
                 <form onSubmit={this.handleSubmit}>
                     <input
                         name="first"

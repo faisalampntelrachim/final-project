@@ -46,9 +46,7 @@ export default function FindUsers() {
     const onChange = e => {
         setSearch(e.target.value);
     };
-    const onSearchClick = e => {
-        setSearch(e.target.value);
-    };
+
     // const onSearchClick = e => setUsers(e.target.value);
 
     return (

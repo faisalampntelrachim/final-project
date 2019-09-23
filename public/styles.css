@@ -2,7 +2,22 @@ body {
     background-color: yellow;
     background-size: 100%;
     display: flex;
+    margin: 0;
     flex-direction: column;
+    font-family: "Almendra SC", serif;
+}
+.welcomeimg {
+    margin: 0;
+    animation: pulse 5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        background-color: #001f3f;
+    }
+    100% {
+        background-color: yellow;
+    }
 }
 .registration {
     background-size: 100%;
@@ -12,11 +27,8 @@ body {
 .registration p {
     color: maroon;
 }
-.registration h1,
-h2 {
-    font-family: "Almendra SC", serif;
-}
 
+.registration,
 .login h1,
 h2 {
     font-family: "Almendra SC", serif;
@@ -25,7 +37,7 @@ h2 {
     color: maroon;
 }
 header {
-    background-color: blue;
+    background-color: lightblue;
     margin-top: 0px;
     height: 100px;
     display: flex;
@@ -58,6 +70,7 @@ header img {
 .main img {
     height: 300px;
 }
+
 .friends {
     display: flex;
     /* justify-content: space-between; */
@@ -90,8 +103,10 @@ header img {
 .profilepic img {
     height: 300px;
 }
+
 .bioeditor1 textarea {
     height: 100px;
+    width: 300px;
 }
 
 .otherprofile img {
@@ -121,4 +136,8 @@ header img {
 .chat-messages textarea {
     height: 100px;
     width: 400px;
+}
+.panel textarea {
+    height: 300px;
+    width: 300px;
 }

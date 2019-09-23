@@ -10,7 +10,6 @@ body {
     margin: 0;
     animation: pulse 5s infinite;
 }
-
 @keyframes pulse {
     0% {
         background-color: #001f3f;
@@ -53,6 +52,10 @@ a {
     margin-right: 40px;
     font-size: 18px;
 }
+nav :hover {
+    color: #fff;
+    background-color: green;
+}
 header img {
     float: left;
     height: 100px;
@@ -63,6 +66,24 @@ header img {
     justify-content: center;
     flex-direction: column;
 }
+
+@keyframes animatedBackground {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 100% 0;
+    }
+}
+#animate-area {
+    width: 160px;
+    height: 100px;
+    background-image: url(Ampelmann.png);
+    background-position: 0px 0px;
+    background-repeat: repeat-x;
+    animation: animatedBackground 5s linear infinite;
+}
+
 .welcomeimg img {
     height: 400px;
     width: 800px;
@@ -140,4 +161,10 @@ header img {
 .panel textarea {
     height: 300px;
     width: 300px;
+}
+.panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }

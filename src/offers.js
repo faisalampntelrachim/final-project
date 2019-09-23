@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "./axios";
 
-export class Panel extends React.Component {
+export class Offers extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -22,7 +22,11 @@ export class Panel extends React.Component {
             {
                 file: e.target.files[0]
             },
-            () => console.log("HandleChange in panel component: ", this.state)
+            () =>
+                console.log(
+                    "HandleChange in // REVIEW:  component: ",
+                    this.state
+                )
         );
     }
 
@@ -39,7 +43,7 @@ export class Panel extends React.Component {
                 console.log("resp from post/panel handleclick:", resp);
                 // this.imageurl.unshift(resp.data.image);
                 // unshift the image. Put it in the front of an array
-                this.props.updateImageurl(resp.data.image);
+                this.props.addComments(resp.data.comments);
                 // first: response.data[0].first,
                 // last: response.data[0].last,
                 // imageurl: response.data[0].imageurl,
@@ -52,14 +56,19 @@ export class Panel extends React.Component {
     render() {
         return (
             <div>
-                <h1>Offered and requested tours!</h1>
                 <div className="panel">
+                    <h1>Here find all of our tours!</h1>
+                    <input
+                        type="description"
+                        name="description"
+                        onChange={this.handleChange}
+                    />
+                    <br />
                     <textarea
                         type="text"
                         name=""
                         onChange={this.handleChange}
                     />
-                    <br />
                     <button onClick={this.handleClick}>Save</button>
                     <br />
                     <input
@@ -75,24 +84,9 @@ export class Panel extends React.Component {
     }
 }
 
-// export default function Panel() {
-//     const dispatch = useDispatch();
-//     const friends = useSelector(
-//         state =>
-//             state.friends &&
-//             state.friends.filter(friends => friends.accepted == true)
-//     );
-//     const wannabes = useSelector(
-//         state =>
-//             state.friends &&
-//             state.friends.filter(friends => friends.accepted == false)
-//     );
-//     console.log("friends", friends);
-//     console.log("wannnabes", wannabes);
-//     useEffect(() => {
-//         dispatch(receiveFriendsWannabes());
-//     }, []);
-//
-//     if (!friends) {
-//         return null;
-//     }
+// <input
+//     type="file"
+//     name=""
+//     accept="image/*"
+//     onChange={this.handleChange}
+// />

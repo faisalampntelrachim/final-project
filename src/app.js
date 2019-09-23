@@ -9,7 +9,8 @@ import FindUsers from "./findusers";
 // import CuteAnimals from "./cuteanimals";
 import Friends from "./friends";
 import { Chat } from "./chat";
-import { Panel } from "./panel";
+import Reviews from "./reviews";
+import { Offers } from "./offers";
 
 export default class App extends React.Component {
     constructor() {
@@ -72,11 +73,13 @@ export default class App extends React.Component {
                     <div>
                         <header>
                             <h1 onClick={this.showModal}></h1>
-                            <Link to="/friends">Friends</Link>
-                            <Link to="/">Profile</Link>
-                            <Link to="/chat">Chat</Link>
-                            <Link to="/panel">Offered and requested tours</Link>
-                            <a href="/logout">Log out</a>
+                            <nav>
+                                <Link to="/">Profile</Link>
+                                <Link to="/offers">Offers</Link>
+                                <Link to="/chat">Chat</Link>
+                                <Link to="/reviews">Reviews</Link>
+                                <a href="/logout">Log out</a>
+                            </nav>
                             <img src="/Brandeburger-tor.jpg" />
                             <Profilepic
                                 first={this.state.first} // no comma here
@@ -85,6 +88,9 @@ export default class App extends React.Component {
                                 showModal={this.showModal}
                             />
                         </header>
+                    </div>
+                    <div id="animate-area">
+                        <img src="/Ampelmann.png" />
                     </div>
                     <Route
                         exact
@@ -142,7 +148,8 @@ export default class App extends React.Component {
                         />
                     )}
                 />
-                <Route exact path="/panel" render={() => <Panel />} />
+                <Route exact path="/reviews" render={() => <Reviews />} />
+                <Route exact path="/offers" render={() => <Offers />} />
             </BrowserRouter>
         );
     }

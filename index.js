@@ -368,25 +368,25 @@ app.get("/friends-wannabes", (req, res) => {
         });
 });
 
-//for comments in panel ///////////////////////////////
-app.get("/panel/:imageId", (req, res) => {
+//for comments in reviews ///////////////////////////////
+app.get("/reviews", (req, res) => {
     // console.log("comments get route");
-    console.log("Params in get params", req.params);
-    db.showComment(req.params.imageId).then(result => {
-        console.log("Result of the get comment params is: ", result);
+    console.log("Server in get /reviews", res);
+    db.getComments(req.session.userId).then(result => {
+        console.log("Result of the get reviews getComments is: ", result);
         res.json(result);
     });
 });
 
-app.post("/panel/", (req, res) => {
-    const { comment, username, id } = req.body;
-    db.addComments(comment, username, id)
+app.post("/reviews", (req, res) => {
+    const { comment } = req.body;
+    db.addComments(comment, req.session.userId)
         .then(result => {
-            console.log("The result in post comment", result);
+            console.log("The result in post reviews", result);
             res.json(result);
         })
         .catch(err => {
-            console.log("uploading comment error", err);
+            console.log("uploading comment error in reviews", err);
         });
 });
 

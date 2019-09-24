@@ -34,17 +34,17 @@ export default function Reviews() {
     };
 
     return (
-        <div className="panel">
+        <div>
             <h1>Please tell us about your experience in the tours!</h1>
-            <br />
 
-            {rev.map(users => (
-                <div className="cards" key={users.id}>
-                    <h3>{users.comment}</h3>
-                </div>
-            ))}
-
-            <div className="reviewtextarea">
+            <div className="panel">
+                {rev.map(users => (
+                    <div className="cards" key={users.id}>
+                        <h3>{users.comment}</h3>
+                    </div>
+                ))}
+            </div>
+            <div className="review-textarea">
                 <textarea
                     type="text"
                     name=""

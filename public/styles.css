@@ -12,7 +12,7 @@ body {
 }
 @keyframes pulse {
     0% {
-        background-color: #001f3f;
+        background-color: green; /*#001f3f*/
     }
     100% {
         background-color: yellow;
@@ -167,20 +167,24 @@ header img {
     width: 300px;
 }
 .panel {
-    display: flex;
+    display: grid;
+    align-items: center;
+    grid-template-columns: auto auto auto;
     /* display: grid | inline-grid;*/
     /* justify-content: center;
     flex-direction: column; */
-    display: flex;
-    align-items: center;
     /* flex-direction: column; */
-    align-items: center;
+    /* flex-direction: column; */
 }
 
 .cards {
+    width: 100%;
     display: flex;
     margin-left: 20px;
-    grid-template-columns: auto auto auto auto;
+    /* grid-template-columns: auto auto auto; */
+    /* display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr; */
     padding: 20px;
     max-width: 200px;
     border: solid 1px black;
@@ -190,11 +194,40 @@ header img {
 
 .cards :hover {
     box-shadow: 0 20px 16px 0 rgba(0, 0, 0, 0.2);
-    background-color: lightgray;
+    background-color: gray;
+}
+.review-textarea {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+.review-textarea textarea {
+    height: 130px;
+    width: 300px;
 }
 .something {
     display: flex;
     align-items: center;
     /* justify-content: center; */
     flex-direction: column;
+}
+.img-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    margin: 20px;
+    /* padding: 20px; */
+    text-align: center;
+    /* border: solid 5px black; */
+    border-radius: 20px;
+    /* padding: 0; */
+    /* background-color: teal; */
+    margin-top: 70px;
+}
+
+.card {
+    max-width: 300px;
+    border: solid 5px black;
+    margin-bottom: 20px;
+    background-color: teal;
 }

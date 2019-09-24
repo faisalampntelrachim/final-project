@@ -10,7 +10,7 @@ import FindUsers from "./findusers";
 import Friends from "./friends";
 import { Chat } from "./chat";
 import Reviews from "./reviews";
-import { Offers } from "./offers";
+import Tours from "./tours";
 
 export default class App extends React.Component {
     constructor() {
@@ -75,7 +75,7 @@ export default class App extends React.Component {
                             <h1 onClick={this.showModal}></h1>
                             <nav>
                                 <Link to="/">Profile</Link>
-                                <Link to="/offers">Offers</Link>
+                                <Link to="/tours">Offered Tours</Link>
                                 <Link to="/chat">Chat</Link>
                                 <Link to="/reviews">Reviews</Link>
                                 <a href="/logout">Log out</a>
@@ -149,7 +149,7 @@ export default class App extends React.Component {
                     )}
                 />
                 <Route exact path="/reviews" render={() => <Reviews />} />
-                <Route exact path="/offers" render={() => <Offers />} />
+                <Route exact path="/tours" render={() => <Tours />} />
             </BrowserRouter>
         );
     }

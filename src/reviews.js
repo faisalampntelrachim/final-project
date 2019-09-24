@@ -5,7 +5,7 @@ export default function Reviews() {
     const [reviews, setReviews] = useState(""); //when im inserting im insering one comment because is a string
     const [rev, setRev] = useState([]);
     useEffect(() => {
-        axios.get("/reviews").then(response => {
+        axios.get("/reviews.json").then(response => {
             console.log("axios get reviews is:", response.data);
             setRev(response.data);
         });
@@ -17,35 +17,53 @@ export default function Reviews() {
     };
     const handleClick = e => {
         e.preventDefault();
-
-        console.log("handleClick in reviews is working:");
+        // e.target.value = "";
+        console.log("handleClick in reviews is working:", reviews);
         axios
-            .post("/reviews", reviews)
+            .post("/reviews", { comment: reviews }) // I want to pass a n object to the server.ts like params
             .then(resp => {
-                console.log("resp from post/ handlechange:", resp);
+                setReviews(""); // keeping track of the text field
+                // e.target.value = "";
+                setRev([...rev, resp.data]); //keeping track of the array or comments
+                console.log("resp from post/ handlechange:", resp.data);
             })
             .catch(err => {
-                console.log("err in post/panel handlechange:", err);
+                console.log("err in post/reviews handlechange:", err);
             });
     };
 
     return (
-        <div>
+        <div className="panel">
+            <h1>Please tell us about your experience in the tours!</h1>
+            <br />
+
             {rev.map(users => (
-                <div key={users.id}>
-                    <div className="panel">
-                        <h1>
-                            Please tell us about your experience in the tours!
-                        </h1>
-                        <textarea type="text" name="" onChange={handleChange} />
-                        <br />
-                        <button onClick={handleClick}>Save</button>
-                    </div>
+                <div className="cards" key={users.id}>
+                    <h3>{users.comment}</h3>
                 </div>
             ))}
+
+            <div className="reviewtextarea">
+                <textarea
+                    type="text"
+                    name=""
+                    onChange={handleChange}
+                    value={reviews}
+                />
+                <br />
+                <button onClick={handleClick}>Save</button>
+            </div>
         </div>
     );
 }
 
+// {rev.map(users => (
+//     <div className="cards" key={users.id}>
+//         <h3>{users.comment}</h3>
+//     </div>
+// ))}
 // {reviews.map(users => (
+//     <div key={users.id}>
+
+// {rev.map(users => (
 //     <div key={users.id}>

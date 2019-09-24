@@ -83,7 +83,11 @@ header img {
     background-repeat: repeat-x;
     animation: animatedBackground 5s linear infinite;
 }
-
+#animate-area img {
+    height: 700px;
+    /* background-attachment: fixed;
+    background-position: center; */
+}
 .welcomeimg img {
     height: 400px;
     width: 800px;
@@ -164,7 +168,33 @@ header img {
 }
 .panel {
     display: flex;
+    /* display: grid | inline-grid;*/
+    /* justify-content: center;
+    flex-direction: column; */
+    display: flex;
     align-items: center;
-    justify-content: center;
+    /* flex-direction: column; */
+    align-items: center;
+}
+
+.cards {
+    display: flex;
+    margin-left: 20px;
+    grid-template-columns: auto auto auto auto;
+    padding: 20px;
+    max-width: 200px;
+    border: solid 1px black;
+    margin-bottom: 20px;
+    background-color: white;
+}
+
+.cards :hover {
+    box-shadow: 0 20px 16px 0 rgba(0, 0, 0, 0.2);
+    background-color: lightgray;
+}
+.something {
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
     flex-direction: column;
 }

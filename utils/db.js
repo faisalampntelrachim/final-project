@@ -252,7 +252,39 @@ exports.addComments = function(comment, comment_id, created_at) {
             return rows;
         });
 };
+/////////////////////tours/////////////
 
+//to get the tours
+exports.getTours = function() {
+    return db
+        .query(
+            `SELECT url,
+                    title,
+                    description
+            FROM tours
+            `
+        )
+        .then(({ rows }) => {
+            return rows;
+        });
+};
+//to add the tours
+exports.addTours = function(url, title, description) {
+    console.log(" tours data");
+    return db
+        .query(
+            `INSERT INTO tours
+            (url, title, description)
+        VALUES ($1, $2, $3)
+        RETURNING *`,
+            [url, title, description]
+        )
+        .then(({ rows }) => {
+            return rows;
+        });
+};
+
+//////////////////////////////////
 // REFERENCES it guarantes for every receiver user there is an id
 
 //that will give all of the rows between the users

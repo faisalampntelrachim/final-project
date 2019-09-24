@@ -26,6 +26,7 @@ export default function Reviews() {
                 // e.target.value = "";
                 setRev([...rev, resp.data]); //keeping track of the array or comments
                 console.log("resp from post/ handlechange:", resp.data);
+                console.log("");
             })
             .catch(err => {
                 console.log("err in post/reviews handlechange:", err);

@@ -1,10 +1,13 @@
 body {
+    background-image: url("stefan-widua-iPOZf3tQfHA-unsplash.jpg");
     background-color: yellow;
     background-size: 100%;
     display: flex;
     margin: 0;
     flex-direction: column;
     font-family: "Almendra SC", serif;
+    background-attachment: fixed;
+    background-position: center;
 }
 .welcomeimg {
     margin: 0;
@@ -36,7 +39,7 @@ h2 {
     color: maroon;
 }
 header {
-    background-color: lightblue;
+    background-color: #797b3a;
     margin-top: 0px;
     height: 100px;
     display: flex;
@@ -54,7 +57,7 @@ a {
 }
 nav :hover {
     color: #fff;
-    background-color: green;
+    background-color: blue;
 }
 header img {
     float: left;
@@ -75,7 +78,7 @@ header img {
         background-position: 100% 0;
     }
 }
-#animate-area {
+/* #animate-area {
     width: 160px;
     height: 100px;
     background-image: url(Ampelmann.png);
@@ -85,9 +88,7 @@ header img {
 }
 #animate-area img {
     height: 700px;
-    /* background-attachment: fixed;
-    background-position: center; */
-}
+} */
 .welcomeimg img {
     height: 400px;
     width: 800px;
@@ -179,6 +180,7 @@ header img {
 
 .cards {
     width: 100%;
+    height: 130px;
     display: flex;
     margin-left: 20px;
     /* grid-template-columns: auto auto auto; */
@@ -186,15 +188,18 @@ header img {
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr; */
     padding: 20px;
-    max-width: 200px;
+    max-width: 300px;
     border: solid 1px black;
     margin-bottom: 20px;
     background-color: white;
+    filter: grayscale(50%);
+    opacity: 0.6;
+    border-radius: 180px;
 }
 
 .cards :hover {
     box-shadow: 0 20px 16px 0 rgba(0, 0, 0, 0.2);
-    background-color: gray;
+    background-color: lightgray;
 }
 .review-textarea {
     align-items: center;

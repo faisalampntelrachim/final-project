@@ -89,9 +89,6 @@ export default class App extends React.Component {
                             />
                         </header>
                     </div>
-                    <div id="animate-area">
-                        <img src="/Ampelmann.png" />
-                    </div>
                     <Route
                         exact
                         path="/"
@@ -195,3 +192,7 @@ export default class App extends React.Component {
 //<Route exact path="/chat" componenet={Chat} />
 //<Route exact path="/chat" componenet={Chat} />
 // <Link to="/users">Find users</Link>
+
+// <div id="animate-area">
+//     <img src="/Ampelmann.png" />
+// </div>

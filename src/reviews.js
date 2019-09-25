@@ -41,6 +41,11 @@ export default function Reviews() {
                 {rev.map(users => (
                     <div className="cards" key={users.id}>
                         <h3>{users.comment}</h3>
+                        <span>☆</span>
+                        <span>☆</span>
+                        <span>☆</span>
+                        <span>☆</span>
+                        <span>☆</span>
                     </div>
                 ))}
             </div>

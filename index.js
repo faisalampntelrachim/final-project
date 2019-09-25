@@ -394,27 +394,35 @@ app.post("/reviews", (req, res) => {
 /////////////////////////////////////////
 
 ////for tours field in the website//////
-app.get("/tours.json", (req, res) => {
-    // console.log("comments get route");
-    console.log("Server in get /tours", res.data);
-    db.getTours(req.session.userId).then(result => {
-        console.log("Result of the get tours getComments is: ", result);
-        res.json(result);
+// app.get("/tours.json", (req, res) => {
+//     // console.log("comments get route");
+//     console.log("Server in get /tours", res.data);
+//     db.getTours(req.session.userId).then(result => {
+//         console.log("Result of the get tours  is: ", result);
+//         res.json(result);
+//     });
+// });
+
+app.post("/tours", uploader.single("file"), s3.upload, (req, res) => {
+    const { filename } = req.file;
+    const { title, description } = req.body;
+    const url = config.s3Url + filename;
+    // const { first, last } = req.body;
+    console.log("the image url is:", url, title, description);
+    if (req.file) {
+        console.log("The req.file in tours is :", req.file);
+    }
+    db.addTours(req.session.userId, url, title, description).then(result => {
+        console.log("The new image is:", result);
+        // url.unshift();
+        res.json({
+            image: url,
+            title: title,
+            description: description
+        });
     });
 });
 
-app.post("/tours", (req, res) => {
-    console.log("app post reviews", req.body);
-    const { url, title, description } = req.body;
-    db.addTours(url, title, description, req.session.userId)
-        .then(result => {
-            console.log("The result in post reviews", result);
-            res.json(result);
-        })
-        .catch(err => {
-            console.log("uploading comment error in reviews", err);
-        });
-});
 ////////////////////////////////////////
 app.get("/logout", (req, res) => {
     req.session = null;

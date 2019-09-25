@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "./axios";
 
 export default function Offers() {
-    const [tour, setTour] = useState({}); //when im inserting im insering one comment because is a string
+    const [tour, setTour] = useState({}); //when im inserting im inserting one comment because is a string
     const [tours, setTours] = useState([]);
     useEffect(() => {
-        axios.get("/tours.json").then(response => {
-            console.log("axios get tours is:", response.data);
-            setTours(response.data);
-        });
+        // axios.get("/tours.json").then(response => {
+        //     console.log("axios get tours is:", response.data);
+        //     setTours(response.data);
+        // });
     }, []);
 
     const handleFileChange = e => {
@@ -17,14 +17,14 @@ export default function Offers() {
             [e.target.name]: e.target.files[0]
             // [e.target.name]: e.target.files[0]
         });
-        console.log("handleFileChange in tours componenet", e.target.files);
+        console.log("handleFileChange in tours componenet", e.target.files[0]);
     };
     const handleChange = e => {
         console.log("handleChange in tours component:");
         e.preventDefault();
         setTour({
             ...tour,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value[0]
         });
         console.log("handleChange in tours component:", e.target.value);
     };
@@ -34,10 +34,10 @@ export default function Offers() {
         console.log("handleClick in tours is working:");
         var formData = new FormData();
         console.log("resp from post/upload:", formData);
-
-        formData.append("title", formData.name.title); //with this.title i access the property title
-        formData.append("description", formData.name.description);
-        formData.append("file", formData.name.files);
+        // formData.append(" the title is", formData.name.title);
+        formData.append("the title is:", formData.name.title); //with this.title i access the property title
+        formData.append("the description is:", formData.name.description);
+        formData.append("the file is:", formData.name.file);
         // console.log("formData", formData);
 
         // me.images.unshift(resp.data[0]); // unshift the image. Put it in the front of an arra
@@ -51,9 +51,9 @@ export default function Offers() {
                     resp
                 );
                 setTours({
-                    title: tours.title,
-                    description: tours.description,
-                    url: tours.url
+                    title: resp.title,
+                    description: resp.description,
+                    url: resp.url
                 });
             })
             .catch(err => {
@@ -75,9 +75,9 @@ export default function Offers() {
                     type="file"
                     name="name"
                     accept="image/*"
-                    onChange={handleChange}
+                    onChange={handleFileChange}
                 />
-                <button onClick={handleFileChange}>Upload</button>
+                <button onClick={handleClick}>Upload</button>
                 <input
                     type="description"
                     name="description"

@@ -283,6 +283,35 @@ exports.addTours = function(url, title, description) {
             return rows;
         });
 };
+///////////////////////////tour guides/////////
+exports.getTourguides = function() {
+    return db
+        .query(
+            `SELECT url,
+                    title,
+                    description
+            FROM tourguides
+            `
+        )
+        .then(({ rows }) => {
+            return rows;
+        });
+};
+//to add the tours
+exports.addTourguides = function(url, title, description) {
+    console.log(" tours data");
+    return db
+        .query(
+            `INSERT INTO tourguides
+            (url, title, description)
+        VALUES ($1, $2, $3)
+        RETURNING *`,
+            [url, title, description]
+        )
+        .then(({ rows }) => {
+            return rows;
+        });
+};
 
 //////////////////////////////////
 // REFERENCES it guarantes for every receiver user there is an id

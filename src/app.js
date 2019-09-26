@@ -11,6 +11,7 @@ import Friends from "./friends";
 import { Chat } from "./chat";
 import Reviews from "./reviews";
 import Tours from "./tours";
+import Tourguides from "./tourguides";
 
 export default class App extends React.Component {
     constructor() {
@@ -78,6 +79,7 @@ export default class App extends React.Component {
                                 <Link to="/tours">Offered Tours</Link>
                                 <Link to="/chat">Chat</Link>
                                 <Link to="/reviews">Reviews</Link>
+                                <Link to="/tourguides">Tour guides</Link>
                                 <a href="/logout">Log out</a>
                             </nav>
                             <img src="/Brandeburger-tor.jpg" />
@@ -147,6 +149,7 @@ export default class App extends React.Component {
                 />
                 <Route exact path="/reviews" render={() => <Reviews />} />
                 <Route exact path="/tours" render={() => <Tours />} />
+                <Route exact path="/tourguides" render={() => <Tourguides />} />
             </BrowserRouter>
         );
     }

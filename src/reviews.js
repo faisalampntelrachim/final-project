@@ -62,7 +62,7 @@ export default function Reviews() {
         </div>
     );
 }
-
+//<div className="review-textarea">
 // {rev.map(users => (
 //     <div className="cards" key={users.id}>
 //         <h3>{users.comment}</h3>

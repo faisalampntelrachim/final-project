@@ -426,7 +426,7 @@ app.post("/tours", uploader.single("file"), s3.upload, (req, res) => {
 ////////////////////////////////////////tour guides//////////
 app.get("/tourguides.json", (req, res) => {
     // console.log("comments get route");
-    console.log("Server in get /tours", res.data);
+    console.log("Server in get /tourguides", res.data);
     db.getTourguides(req.session.userId).then(result => {
         console.log("Result of the get tours  is: ", result);
         res.json(result);
@@ -440,7 +440,7 @@ app.post("/tourguides", uploader.single("file"), s3.upload, (req, res) => {
     // const { first, last } = req.body;
     console.log("the image url is:", url, title, description);
     if (req.file) {
-        console.log("The req.file in tours is :", req.file);
+        console.log("The req.file in tourguides is :", req.file);
     }
     db.addTourguides(url, title, description).then(result => {
         console.log("The new image is:", result);
@@ -452,6 +452,9 @@ app.post("/tourguides", uploader.single("file"), s3.upload, (req, res) => {
         });
     });
 });
+
+///////////modalbox/////////////////
+
 ////////////////////////////////////////////////////////////
 app.get("/logout", (req, res) => {
     req.session = null;

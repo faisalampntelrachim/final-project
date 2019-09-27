@@ -1,5 +1,5 @@
 body {
-    background-image: url("stefan-widua-iPOZf3tQfHA-unsplash.jpg");
+    background-image: url("Brandeburger-tor.jpg");
     background-color: yellow;
     background-size: 100%;
     display: flex;
@@ -12,6 +12,7 @@ body {
 .welcomeimg {
     margin: 0;
     animation: pulse 5s infinite;
+    padding-bottom: 300px;
 }
 @keyframes pulse {
     0% {
@@ -63,6 +64,7 @@ header img {
     float: left;
     height: 100px;
 }
+
 .welcomeimg {
     display: flex;
     align-items: center;
@@ -123,7 +125,7 @@ header img {
     display: flex;
     align-items: center;
     flex-direction: column;
-    text-shadow: 2px 2px blue;
+    /* text-shadow: 2px 2px blue; */
     /* text-shadow: 14px black; */
 }
 .profilepic img {
@@ -180,7 +182,7 @@ header img {
 
 .cards {
     width: 100%;
-    height: 130px;
+    height: 150px;
     display: flex;
     margin-left: 20px;
     /* grid-template-columns: auto auto auto; */
@@ -188,7 +190,7 @@ header img {
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr; */
     padding: 20px;
-    max-width: 300px;
+    max-width: 390px;
     border: solid 1px black;
     margin-bottom: 20px;
     background-color: white;
@@ -220,11 +222,11 @@ header img {
     margin-top: 70px;
 }
 .tours {
-    max-width: 300px;
+    max-width: 410px;
     border-radius: 70px;
     border: solid 1px black;
     margin-bottom: 20px;
-    background-color: gray;
+    background-color: rgb(119, 119, 119);
 }
 .tours img {
     height: 170px;
@@ -250,9 +252,9 @@ header img {
 }
 .b {
     filter: grayscale(50%);
-    opacity: 0.8;
+    opacity: 0.9;
     height: 200px;
-    width: 1000px;
+    max-width: 1100px;
     /* max-width: 500px; */
     border-radius: 70px;
     border: solid 1px black;
@@ -260,6 +262,7 @@ header img {
     background-color: white;
 }
 .b img {
+    border-radius: 50px;
     height: 120px;
     width: 200px;
     float: left;
@@ -272,4 +275,15 @@ header img {
 .anything {
     display: flex;
     flex-direction: column;
+}
+.info {
+    background-color: yellow;
+    opacity: 0.8;
+    display: grid;
+    grid-template-columns: 1fr;
+    /* grid-template-rows: 1fr 1fr 1fr; */
+    margin: 20px;
+    text-align: center;
+    border-radius: 20px;
+    margin-top: 70px;
 }

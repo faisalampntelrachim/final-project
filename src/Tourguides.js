@@ -4,18 +4,19 @@ import axios from "./axios";
 export default function Tourguides() {
     const [tour, setTour] = useState({}); //when im inserting im inserting one comment because is a string
     const [tours, setTours] = useState([]);
+    // const [title, setTitle] = useState("");
+
     useEffect(() => {
         axios.get("/tourguides.json").then(response => {
             console.log("axios get tours is:", response.data);
             setTours(response.data);
         });
-    }, []);
+    }, [tour]);
 
     const handleFileChange = e => {
         setTour({
             ...tour,
             [e.target.name]: e.target.files[0]
-            // [e.target.name]: e.target.files[0]
         });
         console.log("handleFileChange in tours componenet", e.target.files[0]);
     };
@@ -26,11 +27,13 @@ export default function Tourguides() {
             ...tour,
             [e.target.name]: e.target.value
         });
-        console.log("handleChange in tours component:", e.target.value);
+        // setTitle({ [e.target.name.title]: e.target.value });
+        console.log("handleChange in tours component:", e.target);
     };
     const handleClick = e => {
         e.preventDefault();
-        // e.target.value = "";
+        // e.target.name.title = "";
+        console.log("Something", e.target.name.title);
         console.log("handleClick in tours is working:");
         var formData = new FormData();
         console.log("resp from post/upload:", formData);
@@ -47,22 +50,20 @@ export default function Tourguides() {
 
             .then(resp => {
                 console.log(
-                    "resp from post/ handlechange in tours component:",
+                    "resp from post/ handlechange in tourguides component:",
                     resp
                 );
-                setTours({
+                // setTitle({});
+                setTour({
                     title: resp.title,
                     description: resp.description,
                     url: resp.url
                 });
             })
             .catch(err => {
-                console.log("err in post/tours handlechange:", err);
+                console.log("err in post/tourguides handlechange:", err);
             });
     };
-
-    /////////////////////////
-
     return (
         <div>
             <h1>Here find all of our tourist guides!</h1>
@@ -72,6 +73,7 @@ export default function Tourguides() {
                         <img src={users.url} />
                         <h3>{users.title}</h3>
                         <h3>{users.description}</h3>
+                        <button>Book a tour</button>
                     </div>
                 ))}
             </div>

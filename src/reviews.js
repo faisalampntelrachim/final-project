@@ -9,7 +9,7 @@ export default function Reviews() {
             console.log("axios get reviews is:", response.data);
             setRev(response.data);
         });
-    }, []);
+    }, [reviews]);
 
     const handleChange = e => {
         setReviews(e.target.value);

@@ -12,6 +12,7 @@ import { Chat } from "./chat";
 import Reviews from "./reviews";
 import Tours from "./tours";
 import Tourguides from "./tourguides";
+import Info from "./info";
 
 export default class App extends React.Component {
     constructor() {
@@ -80,9 +81,10 @@ export default class App extends React.Component {
                                 <Link to="/chat">Chat</Link>
                                 <Link to="/reviews">Reviews</Link>
                                 <Link to="/tourguides">Tour guides</Link>
+                                <Link to="/info">Info</Link>
                                 <a href="/logout">Log out</a>
                             </nav>
-                            <img src="/Brandeburger-tor.jpg" />
+
                             <Profilepic
                                 first={this.state.first} // no comma here
                                 last={this.state.last}
@@ -150,10 +152,13 @@ export default class App extends React.Component {
                 <Route exact path="/reviews" render={() => <Reviews />} />
                 <Route exact path="/tours" render={() => <Tours />} />
                 <Route exact path="/tourguides" render={() => <Tourguides />} />
+                <Route exact path="/info" render={() => <Info />} />
             </BrowserRouter>
         );
     }
 }
+
+// <img src="/Brandeburger-tor.jpg" />
 //     render() {
 //         return (
 //             <div>

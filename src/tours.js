@@ -9,7 +9,7 @@ export default function Offers() {
             console.log("axios get tours is:", response.data);
             setTours(response.data);
         });
-    }, []);
+    }, [tour]);
 
     const handleFileChange = e => {
         setTour({
@@ -50,10 +50,10 @@ export default function Offers() {
                     "resp from post/ handlechange in tours component:",
                     resp
                 );
-                setTours({
-                    title: resp.title,
-                    description: resp.description,
-                    url: resp.url
+                setTour({
+                    title: resp.data.title,
+                    description: resp.data.description,
+                    url: resp.data.url
                 });
             })
             .catch(err => {
